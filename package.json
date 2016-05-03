@@ -1,0 +1,42 @@
+{
+  "name": "quindar-angular",
+  "version": "1.0.0",
+  "description": "AngularJS version of mission operations app widgets and data visualization ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/audacyDevOps/quindar-angular.git"
+  },
+  "keywords": [
+    "quindar",
+    "mission",
+    "operations",
+    "data",
+    "visualization"
+  ],
+  "author": "Ray Lai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/audacyDevOps/quindar-angular/issues"
+  },
+  "homepage": "https://github.com/audacyDevOps/quindar-angular#readme",
+  "dependencies": {
+    "async": "^2.0.0-rc.3",
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "express-mongoose-docs": "^0.3.1",
+    "file-stream-rotator": "0.0.6",
+    "fs": "0.0.2",
+    "line-by-line": "^0.1.4",
+    "mocha": "^2.4.5",
+    "mongoose": "^4.4.14",
+    "morgan": "^1.7.0",
+    "randomstring": "^1.1.4",
+    "socket.io": "^1.4.6",
+    "winston": "^2.2.0"
+  }
+}
