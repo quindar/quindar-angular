@@ -1,10 +1,13 @@
-<!doctype html>
-<html id="ng-app" ng-app="missionOpsApp">
+<!DOCTYPE html>
+<html>
+
 <head>
-   <meta charset="utf-8">
-   
-   <title>Audacy Quindar Widgets AngularJS Standard </title>
-   <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Audacy Quindar Widgets AngularJS Standard </title>
+  <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900">
   <link type="text/css" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
   <!-- custom CSS, e.g. Limitless -->
@@ -12,6 +15,16 @@
   <link type="text/css" rel="stylesheet" href="app/styles/core.css">
   <link type="text/css" rel="stylesheet" href="app/styles/components.css">
   <link type="text/css" rel="stylesheet" href="app/styles/colors.css">
+
+  <!-- gridster -->
+  <link rel="stylesheet" href="app/styles/angular-gridster.min.css" />
+  <link rel="stylesheet" href="app/styles/gridsterDashboard.css" />
+  <link rel="stylesheet" href="app/styles/dropdown/angular-dropdowns.css" />
+  <link rel="stylesheet" href="app/styles/dropdown/normalize.css" />
+  <link rel="stylesheet" href="app/styles/dropdown/page.css" />
+
+  <!-- quindar dashboard style - drop-down style -->
+  <link rel="stylesheet" href="app/styles/index08a.css" />
 
   <!-- Dependencies: angularJS -->
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
@@ -24,98 +37,114 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
 
   <!-- custom scripts, e.g. Limitless -->
-  <script type="text/javascript" src="app/app.js"></script>
-
-</head>
-<body id="index">
-<!-- Main navbar -->
-<div class="navbar navbar-inverse	header-highlight">
-
-  <!-- Navbar header -->
-  <div class="navbar-header">
-    <a class="navbar-brand" href="index.html">
-      <img src="app/images/audacy_logo.svg" alt="" style="width: 60px; height: 35px;">
-    </a>
-    <ul class="nav navbar-nav visible-xs-block">
-      <li>
-        <a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a>
-      </li>
-      <li>
-        <a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a>
-      </li>
-    </ul>
-  </div>
-  <!-- /Navbar header -->
-
-  <!-- Navbar menus -->
-  <div class="navbar-collapse collapse" id="navbar-mobile">
-    <!-- Navbar icons -->
-    <ul class="nav navbar-nav">
-      <li>
-        <a class="sidebar-control sidebar-main-toggle hidden-xs">
-          <i class="icon-paragraph-justify3"></i>
-        </a>
-      </li>
-    </ul>
-      
-    <!-- /Navbar icons -->
-    <ul class="nav navbar-nav navbar-right">
-        
-      <!-- User dropdown -->
-      <li ui-sref-active="active">
-        <a ui-sref="home">Home</a>
-      </li>
-      <li ui-sref-active="active">
-          <a ui-sref="about">About</a>
-      </li>
-      <li ui-sref-active="active">
-        <a ui-sref="login">Login</a>
-      </li>     
-      <!-- /User dropdown -->
-         
-      <!-- Language dropdown -->
-      <li class="dropdown language-switch">
-        <a class="dropdown-toggle" data-toggle="dropdown"> 
-          <img src="app/images/flags/us.png" class="position-left" alt=""> English 
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a class="deutsch"><img src="app/images/flags/de.png" alt=""> Deutsch </a></li>
-          <li><a class="chinese"><img src="app/images/flags/cn.png" alt=""> 中文 </a></li>
-          <li><a class="japanese"><img src="app/images/flags/jp.png" alt=""> 日本語 </a></li>
-          <li><a class="english"><img src="app/images/flags/us.png" alt=""> English </a></li>
-          <li><a class="espana"><img src="app/images/flags/es.png" alt=""> España </a></li>
-          <li><a class="russian"><img src="app/images/flags/ru.png" alt=""> Русский </a></li>
-        </ul>
-      </li>
-      <!-- /Language dropdown -->
-
-    </ul>
-  </div>
-  <!-- /Navbar menus -->
-
-</div>
-<!-- /main navbar -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+  <script type="text/javascript" src="app/scripts/angular-gridster.min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.categories.min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.pie.min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.resize.min.js"></script>
+  <script type="text/javascript" src="app/scripts/dropdown/angular-dropdowns.js"></script>
   
-<div id="sideBarContainer">
-  <div class="container col-md-2 ">
-    <div ui-view="sidebar"></div>
-  </div>
+</head>
 
-  <div class="container col-md-10 ">
-     <div ui-view="body"></div>
-  </div>
-</div>
+<body ng-app="app">
+<div ng-controller="dashboardController">
 
-<div id="aboutContainer" class="container">
-  <div class="container col-md-10 ">
-     <div ui-view="about"></div>
-  </div>
-</div>
+  <div class="navbar navbar-inverse header-highlight" >
+    <!-- Navbar header -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.html">
+        <img src="app/images/audacy_logo.svg" alt="" style="width: 60px; height: 35px;">
+      </a>
+      <ul class="nav navbar-nav visible-xs-block">
+        <li>
+          <a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a>
+        </li>
+        <li>
+          <a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a>
+        </li>
+      </ul>
+    </div>
+    <!-- /Navbar header -->
 
-<div id="loginContainer" class="container col-md-12">
-  <div ui-view="login"></div>
-</div>
+    <!-- Navbar menus -->
+    <div class="navbar-collapse collapse" id="navbar-mobile">
+      
+      <!-- /Navbar icons -->
+      <ul class="nav navbar-nav navbar-right">
+        <!-- User dropdown -->
+        <li ui-sref-active="active">
+          <a ui-sref="home">Home </a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="dashboard">Dashboard </a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="dashboardnoborder">Custom Dashboard </a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="about">About </a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="login">Login </a>
+        </li>     
+        <!-- /User dropdown -->
+         
+        <!-- Language dropdown -->
+        <li class="dropdown language-switch">
+          <a class="dropdown-toggle" data-toggle="dropdown"> 
+            <img src="app/images/flags/us.png" class="position-left" alt=""> English 
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="deutsch"><img src="app/images/flags/de.png" alt=""> Deutsch </a></li>
+            <li><a class="chinese"><img src="app/images/flags/cn.png" alt=""> 中文 </a></li>
+            <li><a class="japanese"><img src="app/images/flags/jp.png" alt=""> 日本語 </a></li>
+            <li><a class="english"><img src="app/images/flags/us.png" alt=""> English </a></li>
+            <li><a class="espana"><img src="app/images/flags/es.png" alt=""> España </a></li>
+            <li><a class="russian"><img src="app/images/flags/ru.png" alt=""> Русский </a></li>
+          </ul>
+        </li>
+        <!-- /Language dropdown -->
+      </ul>
+
+
+    </div>
+    <!-- /Navbar menus -->
+
+  </div>
+  <!-- /main navbar -->
+
+  <div id="mainContainer">
+    <div class="container col-md-2 ">
+      <div ui-view="sidebar"></div>
+    </div>
+    <div class="container col-md-10 ">
+      <div ui-view="body"></div>
+    </div>
+    <div class="container col-md-10 ">
+      <div ui-view="dashboard"></div>
+    </div>
+    <div class="container col-md-12 ">
+      <div ui-view="dashboardnoborder"></div>
+    </div>
+    <div class="container col-md-6 ">
+      <div ui-view="about"></div>
+    </div>
+    <div class="container col-md-12 ">
+      <div ui-view="login"></div>
+    </div>
+    <div class="container col-md-6 col-md-offset-3">
+      <div ui-view="settings"></div>
+    </div>
+  </div>
+  
+<!-- ng-controller=dashboardController -->
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="app/controllers/index08aControllers.js"></script>
+<script type="text/javascript" src="app/directives/index08aDirectives.js"></script>
 
 </body>
+
 </html>

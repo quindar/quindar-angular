@@ -1,0 +1,86 @@
+<div class="content-wrapper col-md-6">
+	<!-- page header -->
+	<div class="page-header">
+		<div class="page-header-content">
+			<div class="page-title">
+				<h2>
+					<i class="glyphicon glyphicon-cog position-left"></i>
+					<span class="text-semibold">Settings </span>
+				</h2>
+			</div>
+
+			<div class="heading-elements">
+			</div>
+		</div>
+	</div> 
+
+	<!-- form content -->
+	<div class="content">
+		<div class="row">
+			<div >
+				<form class="form-horizontal">
+					<div class="panel panel-flat">
+						<div class="panel-heading">
+							<h5 class="panel-title">Widget Settings </h5>
+							
+							<div class="heading-elements">
+								<ul class="icons-list">
+									<li></li>
+								</ul>
+							</div>
+						
+						</div>
+					
+						<div class="panel-body">
+							<div class="form-group">
+								<label class="col-md-3 control-label">Identifier: </label>
+								<div class="col-md-9">
+									<input class="form-control" placeholder="You can define your own name to save your widget settings" type="text" ng-model="widgetSettings.id">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-3 control-label">Stored in: </label>
+								<div class="col-md-9">
+									<label class="radio-inline"> 
+										<div>
+											<span>
+												<input ng-model="widgetSettings.widgetLocalStorage" 
+												ng-checked="widgetSettings.widgetLocalStorage === true"
+												type="radio" value="true">
+											</span>
+										</div>
+										Web browser storage  
+									</label>
+						
+									<label class="radio-inline"> 
+										<div>
+											<span>
+												<input name="storageLocation" ng-model="widgetSettings.widgetLocalStorage"
+												ng-checked="widgetSettings.widgetLocalStorage === false"
+												type="radio" value="false">
+											</span>
+										</div>
+										Cloud storage 
+									</label>	
+								</div>
+							</div>
+
+							<div class="text-right">
+								<a class="pull-right btn btn-warning"><i class="glyphicon glyphicon-refresh "></i> Reset
+								</a>
+								<a class="pull-right btn btn-primary"><i class="glyphicon glyphicon-save "></i> Save
+								</a>
+							</div>
+
+						</div>				
+						<!-- panel-body -->
+
+					</div>
+					<!-- panel panel-flat -->
+				</form>
+			</div>
+		</div>
+
+	</div>
+</div>
