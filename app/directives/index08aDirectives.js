@@ -151,3 +151,37 @@ app.directive('quindarwidget', ['$compile', function (compile) {
   }
 }]);
 
+/**
+// 5/20/2016 RL: currently debug wttime directive; not yet ready for use
+app.directive('wttime', ['$compile', function (compile, $interval) {
+    return {
+      restrict: 'AE',
+      scope: {
+        wttime: '@'
+      },
+      replace: true,
+      controller: ['$scope', function (scope) {
+        scope.$watch('wttime', function (value) {
+          scope.buildView(value);
+        });
+      }],
+      templateUrl: 'app/views/time.html',
+      link: function (scope, elm, attrs) {
+        scope.buildView = function (viewName) {
+          var z = compile('<' + viewName + '></' + viewName + '>')(scope);
+          elm.append(z);
+        }
+
+        function update() {
+          scope.time = new Date().toLocaleTimeString();
+        }
+
+        var promise = $interval(update, 500);
+
+        scope.$on('$destroy', function () {
+          $interval.cancel(promise);
+        });  
+      }
+    };
+}]);
+**/

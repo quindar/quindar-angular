@@ -160,7 +160,7 @@ app.controller('dashboardController', ['$scope', '$timeout',
           sizeY: 1,
           sizeX: 1,
           name: "Page 1- Countdown Clock",
-          directive: "wt-time"
+          directive: "wttime"
         }]
       },
       '2': {
@@ -172,14 +172,14 @@ app.controller('dashboardController', ['$scope', '$timeout',
           sizeY: 1,
           sizeX: 3,
           name: "Page 2 - Countdown Clock",
-          directive: "wt-time"
+          directive: "wttime"
         }, {
           col: 3,
           row: 1,
           sizeY: 1,
           sizeX: 1,
           name: "Page 2 - Thruster",
-          directive: "wt-time"
+          directive: "wttime"
         }]
       },
       '3': {
@@ -258,7 +258,7 @@ app.controller('dashboardController', ['$scope', '$timeout',
       },
       {
         name: 'Countdown Clock',
-        directive: 'wt-time',
+        directive: 'wttime',
         style: {
           width: '33%'
         }
