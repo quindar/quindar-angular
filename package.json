@@ -30,6 +30,7 @@
     "express": "^4.13.4",
     "express-mongoose-docs": "^0.3.1",
     "file-stream-rotator": "0.0.6",
+    "pug": "^2.0.0-alpha7",
     "fs": "0.0.2",
     "line-by-line": "^0.1.4",
     "mocha": "^2.4.5",
