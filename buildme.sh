@@ -7,3 +7,4 @@ echo "Quindar widget build scripts"
 echo "...building dependencies"
 npm install
 echo "...complete installing dependencies"
+echo "...silly test for code merge"
