@@ -2,8 +2,8 @@
 # Program: buildme.sh
 # Purpose: Example how to build quindar widgets
 # Author:  Ray Lai
-# Updated: May 20, 2016
+# Updated: May 24, 2016
 echo "Quindar widget build scripts"
-cd /src
-echo "...building dependencies
+echo "...building dependencies"
 npm install
+echo "...complete installing dependencies"
