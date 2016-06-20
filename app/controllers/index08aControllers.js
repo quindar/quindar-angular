@@ -467,6 +467,21 @@ app.controller('dashboardController', ['$scope', '$timeout', 'adminFactory',
     };
 
     // test flot: begin
+
+      // retrieve vehicle data by vehicleId, limited by nItems rows
+  $scope.getVehiclePartial = function(vehicleId, nItems) {
+    adminFactory.getVehiclePartial(vehicleId, nItems)
+    .success(function(data, status) {
+      console.log("getVehiclePartial() status=" + status);
+      $scope.vehicleDataSet = data.data;
+    })
+    .error(function(err) {
+      console.error('Sorry, Quindar platform cannot serve getVehiclePartial() immediately. Please retry later.');
+    });
+  };
+
+  $scope.dataset = [{ data: [], yaxis: 1, label: 'battery level' }];
+
  $scope.dataset = [{ data: [], yaxis: 1, label: 'sin' }];
   $scope.options = {
     legend: {
