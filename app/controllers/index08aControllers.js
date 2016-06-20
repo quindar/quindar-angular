@@ -469,20 +469,9 @@ app.controller('dashboardController', ['$scope', '$timeout', 'adminFactory',
     // test flot: begin
 
       // retrieve vehicle data by vehicleId, limited by nItems rows
-  $scope.getVehiclePartial = function(vehicleId, nItems) {
-    adminFactory.getVehiclePartial(vehicleId, nItems)
-    .success(function(data, status) {
-      console.log("getVehiclePartial() status=" + status);
-      $scope.vehicleDataSet = data.data;
-    })
-    .error(function(err) {
-      console.error('Sorry, Quindar platform cannot serve getVehiclePartial() immediately. Please retry later.');
-    });
-  };
 
+  $scope.positionDataSet = [];
   $scope.dataset = [{ data: [], yaxis: 1, label: 'battery level' }];
-
- $scope.dataset = [{ data: [], yaxis: 1, label: 'sin' }];
   $scope.options = {
     legend: {
       container: '#legend',
@@ -490,10 +479,35 @@ app.controller('dashboardController', ['$scope', '$timeout', 'adminFactory',
     }
   };
 
+  $scope.getPositionPartial = function(vehicleId, nItems) {
+    adminFactory.getPositionPartial(vehicleId, nItems)
+    .success(function(data, status) {
+      $scope.positionDataSet = data.data;
+      for (var i = 0; i < $scope.positionDataSet.length; i++) {
+         $scope.dataset[0].data.push([ $scope.positionDataSet[i].x, $scope.positionDataSet[i].y]);
+      };
+      console.log("getPositionPartial() status=" + status + "   positionDataSet=" + JSON.stringify($scope.positionDataSet));
+    })
+    .error(function(err) {
+      console.error('Sorry, Quindar platform cannot serve getPositionPartial() immediately. Please retry later.');
+    });
+  };
+
+  $scope.getPositionPartial('IBEX', 100);
+  /**
+  $scope.dataset = [{ data: [], yaxis: 1, label: 'sin' }];
+  $scope.options = {
+    legend: {
+      container: '#legend',
+      show: true
+    }
+  };
+  
+
   for (var i = 0; i < 14; i += 0.5) {
     $scope.dataset[0].data.push([i, Math.sin(i)]);
   }
-
+  **/
   //
   // Categories Example
   //
