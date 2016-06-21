@@ -1,0 +1,27 @@
+/* Style for widgets */
+
+/* Ground Track */
+.graticule {
+  fill: none;
+  stroke: #777;
+  stroke-opacity: .5;
+  stroke-width: .5px;
+}
+
+.land {
+  fill: #888;
+}
+
+.boundary {
+  fill: none;
+  stroke: #fff;
+  stroke-width: .5px;
+}
+
+.groundbutton {
+  padding: 5px 10px;  	
+  color: black;
+  font-size: 10px;
+}
+
+/****************/

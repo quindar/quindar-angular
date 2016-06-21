@@ -7,7 +7,7 @@
 // for google charts only; can be removed for quindar 
 google.load('visualization', '1', {'packages':['corechart']});
 
-var app = angular.module("app", ['gridster', 'ui.bootstrap', 'ui.router']);
+var app = angular.module("app", ['gridster', 'ui.bootstrap', 'ui.router','angular-groundtrack','d3']);
 
 // ui.router definitions
  app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -131,8 +131,8 @@ app.controller('widgetController', ['$scope','$rootScope', function($scope, $roo
 }]);
 
 // controller: dashboardControllerfor dashboard widgets
-app.controller('dashboardController', ['$scope', '$timeout', 
-  function($scope, $timeout) {
+app.controller('dashboardController', ['$scope', '$timeout','d3', 
+  function($scope, $timeout, $d3) {
 
     $scope.gridsterOptions = {
       margins: [20, 20],
@@ -212,12 +212,12 @@ app.controller('dashboardController', ['$scope', '$timeout',
           name: "Page 4 - Quindar Widget 3",
           directive: "quindarpie"
         }, {
-          col: 1,
-          row: 2,
-          sizeY: 1,
-          sizeX: 3,
+          col: 0,
+          row: 0,
+          sizeY: 3,
+          sizeX: 4,
           name: "Page 4 - Ground Track",
-          directive: "quindarlinechart"
+          directive: "groundtrack"
         }]
       },
       '5': {
