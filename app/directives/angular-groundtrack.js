@@ -16,7 +16,7 @@ angular.module('angular-groundtrack',['d3'])
 		  scope: {
 			audacy1: '&',
             audacy2: '&',
-            audacy3: '&',
+            audacy3: '&'
 		          		
 		  },
 		  link: function(scope,element,attributes) {
@@ -60,7 +60,7 @@ angular.module('angular-groundtrack',['d3'])
             var plane = g.append("g");
       
             // Plot world map
-            d3.json("app/images/world-110m.json", function(error, world) {
+            d3.json("../../images/world-110m.json", function(error, world) {
               if (error) throw error;
 
               g.insert("path", ".graticule")
@@ -79,13 +79,13 @@ angular.module('angular-groundtrack',['d3'])
                .style("fill","none")
 	           .style("stroke","#666")
 	           .style("stroke-width", ".5px")
-	           .style("stroke-opacity", ".5")		
+	           .style("stroke-opacity", ".5");	 
 		 
 		      g.selectAll("track")
 	           .data(dataset)
 	           .enter()
                .append("svg:image")
-	           .attr("xlink:href","app/images/Segment_Icons_Black-05.png")//icon_51440.svg best-satellite-dish.png
+	           .attr("xlink:href","../../images/Segment_Icons_Black-05.png")//icon_51440.svg best-satellite-dish.png
 	           .attr("x",function(d){return projection(d)[0]-5;})
 	           .attr("y",function(d){return projection(d)[1]-5;})					
 	           .attr("width","10")
@@ -107,7 +107,7 @@ angular.module('angular-groundtrack',['d3'])
 
             scope.goHome = function() {
               zoom.translate([0,0])
-	              .scale(1)
+	              .scale(1); 
 	          g.transition()
 	           .attr("transform","translate(0,0)");   	
 	        };  
@@ -121,22 +121,22 @@ angular.module('angular-groundtrack',['d3'])
             socket.on('message', console.log.bind(console));	  
 	
 	        scope.connect = function () {
-		      alert("connect")
+		      alert("connect");
 		      socket.emit('telemetry', {"type": 'position', "room": 'Audacy1'});	//Audacy1
 	          socket.emit('telemetry', {"type": 'position', "room": 'Audacy2'});    //Audacy2
 	          socket.emit('telemetry', {"type": 'position', "room": 'Audacy3'});    //Audacy3  
-	        }
+	        };
 			
 			scope.stream = function() {
 				
 				updateStream();
-			}
+			};
 			
 			scope.stop = function() {
 				
 				clearTimeout(timer);
 				
-			}
+			};
 			
 			scope.clear = function() {
 				
@@ -144,9 +144,9 @@ angular.module('angular-groundtrack',['d3'])
                 g.selectAll("path.plane").remove();
 	
 	            L = data_plot1.length;
-	            data_plot1.splice(0,L)
+	            data_plot1.splice(0,L);
                 clearTimeout(timer);
-			}
+			};
 			
 			function updateStream() {
 			  	
@@ -178,7 +178,7 @@ angular.module('angular-groundtrack',['d3'])
 	          latitude = Math.asin(data_z1/r)/Math.PI*180;
 			
 		      data_plot1.push([longitude, latitude]);	
-              L = data_plot1.length;	// length of data_plot1
+              var L = data_plot1.length;	// length of data_plot1
 
 	          var sat_coord = projGround([data_plot1[L-1][0],data_plot1[L-1][1]]);
               var sat_x = sat_coord[0];
@@ -262,12 +262,8 @@ angular.module('angular-groundtrack',['d3'])
 			  }
 			  
 			  timer = setTimeout(updateStream, delay);
-		    };
-		
-		
-		
-		
-		
+		    }
+
             /** position **/
             socket.on('position', function(telemetryData) {
 	          // obtain satellite state
@@ -315,7 +311,7 @@ angular.module('angular-groundtrack',['d3'])
                .duration(10000)
                .attrTween("transform", delta(route.node()))
 		       .remove();
-        }; 
+        }
   
         function delta(path) {
           var l = path.getTotalLength();
@@ -323,24 +319,22 @@ angular.module('angular-groundtrack',['d3'])
           return function(i) {
             return function(t) {
 
-              var p = path.getPointAtLength(t * l)
+              var p = path.getPointAtLength(t * l);
+			  var t2 = Math.min(t+0.05,1);
+		      var p2 = path.getPointAtLength(t2*l);
 		  
-	          var t2 = Math.min(t+0.05,1)
-		      var p2 = path.getPointAtLength(t2*l)
-		  
-		      var x = p2.x-p.x
-		      var y = p2.y-p.y
-		      var r = 90-Math.atan2(-y,x)*180/Math.PI
+		      var x = p2.x-p.x;
+		      var y = p2.y-p.y;
+		      var r = 90-Math.atan2(-y,x)*180/Math.PI;
 		  
               return "translate(" + p.x + "," + p.y + ") scale("+.5+") rotate("+r+")";
             }
           }
-        };
+        }
 
         function projGround(d){
-	  
-	      return projection(d);
-        };
+			return projection(d);
+        }
   
 	  }
 	  

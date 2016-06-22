@@ -1,0 +1,63 @@
+<div class="page-header">
+
+	<div class="pull-right dropdown">
+  		<button ng-click="clearDropdownMenu = !clearDropdownMenu"
+  			class="btn btn-warning "> <i class="glyphicon glyphicon-trash btn-warning"></i> Clear </button>
+  		
+  		<div id="clearDropdown" class="dropdown-content" ng-show="clearDropdownMenu">
+  			<ul>
+				<li ng-repeat="clearWhat in clearOptions">
+					<a ng-click="clearHow(clearWhat.name)" confirm="Are you sure?">{{ clearWhat.name }}</a>
+				</li>
+			</ul>
+  		</div>
+	</div>
+	<a class="pull-right btn btn-info" ng-click="saveWidgets()"><i class="glyphicon glyphicon-save"></i> Save </a>
+	
+	<div class="pull-right dropdown">
+  		<button ng-click="addWidgetDropdownMenu = !addWidgetDropdownMenu" 
+  			class="btn btn-success"> 
+  			<i class="glyphicon glyphicon-plus"></i> Add Widgets </button>
+  		
+  		<div id="myDropdown" class="dropdown-content" ng-show="addWidgetDropdownMenu">
+  			<ul>
+				<li ng-repeat="widget in widgetDefinitions">
+					<a ng-click="addWidget(widget)">{{ widget.name }}</a>
+				</li>
+			</ul>	<!-- ul tag fixed-->
+  		</div>
+	</div>
+	<a class="pull-right btn btn-primary" ng-click="addPage()"><i class="glyphicon glyphicon-plus"></i> Add Page </a>
+	<h3 style="display: inline-block; width: 200px; margin-bottom: 30px;"> Dashboard </h3>
+
+	<select class="form-control" style="width: 180px; margin-bottom: 20px; display:inline-block;" 
+		ng-model="selectedDashboardId" 
+		ng-change="changeDashboard(selectedDashboardId)"
+		ng-options="d.id as d.name for d in dashboards | object2Array | orderBy:'id'">
+	</select>
+</div>
+
+<div gridster="gridsterOptions">
+	<ul>
+		<li gridster-item="widget" ng-repeat="widget in dashboard.widgets">
+			<div class="box" ng-controller="CustomWidgetCtrl">
+				<div class="box-header">
+					<h5>{{ widget.name }}</h5>
+					<div class="box-header-btns pull-right">
+						<a title="settings" ng-click="openSettings(widget)">
+							<i class="glyphicon glyphicon-cog"></i></a>
+						<a title="Remove widget" ng-click="remove(widget)">
+							<i class="glyphicon glyphicon-trash"></i></a>
+					</div>
+				</div>
+				<div class="box-content" >
+					<div class="btn-toolbar">
+						<div quindarwidget="{{ widget.directive }}"></div>
+						<!--<groundtrack></groundtrack> -->
+					</div>
+				</div>
+			</div>
+			
+		</li>
+	</ul>
+</div>

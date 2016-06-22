@@ -961,7 +961,7 @@
 *
 * ---------------------------------------------------------------------------- */
 .layout-boxed {
-  background: url(../images/backgrounds/boxed_bg.png) repeat;
+  background: url(../../images/backgrounds/boxed_bg.png) repeat;
 }
 .layout-boxed > .navbar {
   margin-left: auto;
@@ -993,7 +993,7 @@
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .layout-boxed {
-    background: url(../images/backgrounds/boxed_bg_retina.png) repeat;
+    background: url(../../images/backgrounds/boxed_bg_retina.png) repeat;
   }
 }
 /* ------------------------------------------------------------------------------
@@ -10246,19 +10246,19 @@ body.stop-scrolling {
   top: -1px;
 }
 .ui-selectmenu-images .demo-img-amazon {
-  background: url('../images/placeholder.jpg') no-repeat;
+  background: url('../../images/placeholder.jpg') no-repeat;
 }
 .ui-selectmenu-images .demo-img-youtube {
-  background: url('../images/placeholder.jpg') no-repeat;
+  background: url('../../images/placeholder.jpg') no-repeat;
 }
 .ui-selectmenu-images .demo-img-twitter {
-  background: url('../images/placeholder.jpg') no-repeat;
+  background: url('../../images/placeholder.jpg') no-repeat;
 }
 .ui-selectmenu-images .demo-img-bing {
-  background: url('../images/placeholder.jpg') no-repeat;
+  background: url('../../images/placeholder.jpg') no-repeat;
 }
 .ui-selectmenu-images .demo-img-spotify {
-  background: url('../images/placeholder.jpg') no-repeat;
+  background: url('../../images/placeholder.jpg') no-repeat;
 }
 .ui-slider {
   position: relative;
@@ -15771,8 +15771,8 @@ thead .htCollapseButton:after {
   border: 1px solid transparent;
   padding: 7px 12px;
   outline: 0;
-}
- + .dt-button {
+}  /* removed plus sign*/
+.dt-button {
   margin-left: 10px;
 }
 .dt-button-info {
@@ -16828,7 +16828,7 @@ thead .htCollapseButton:after {
  *
  * ---------------------------------------------------------------------------- */
 .login-cover {
-  background: url('../images/login_cover.jpg') no-repeat;
+  background: url('../../images/login_cover.jpg') no-repeat;
   background-size: cover;
 }
 .login-container {
