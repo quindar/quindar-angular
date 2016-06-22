@@ -39,7 +39,7 @@ app.use(function(req, res, next) {
 });
 
 /**
- * Allows us to parse http body parameters as json
+ * Allows us to parse http body parameters as json.
  **/
 app.use(bodyParser.json());
 
