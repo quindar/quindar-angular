@@ -156,6 +156,13 @@ app.controller('dashboardController', ['$scope', '$timeout', 'adminFactory',
           directive: "quindarlinechart"
         }, {
           col: 2,
+          row: 1,
+          sizeY: 1,
+          sizeX: 2,
+          name: "Page 1 - Flot",
+          directive: "flot"
+        }, {
+          col: 2,
           row: 0,
           sizeY: 1,
           sizeX: 1,
@@ -279,6 +286,14 @@ app.controller('dashboardController', ['$scope', '$timeout', 'adminFactory',
           width: '50%'
         }
       },
+      {
+        name: 'flot',
+        directive: 'flot',
+        dataAttrName: 'dataset',
+        style: {
+          width: '50%'
+        }
+      }
     ];
 
     $scope.widgetDefinitions = widgetDefinitions;
@@ -287,7 +302,8 @@ app.controller('dashboardController', ['$scope', '$timeout', 'adminFactory',
       { name: 'Line Plot' },
       { name: 'Countdown Clock' },
       { name: 'Quindar Pie' },
-      { name: 'Ground Track' }
+      { name: 'Ground Track' },
+      { name: 'flot' }
     ];
 
     $scope.clearOptions = [

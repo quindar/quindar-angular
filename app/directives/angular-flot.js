@@ -31,35 +31,51 @@ angular.module('angular-flot', []).directive('flot', ['$timeout', function ($tim
     restrict: 'EA',
     template: '<div></div>',
     scope: {
+      /**
       dataset: '=',
       options: '=',
       callback: '=',
       onPlotClick: '&',
       onPlotHover: '&',
       onPlotSelected: '&'
+      **/
     },
     link: function (scope, element, attributes) {
       var plot = null;
+      /**
       var width = attributes.width || '100%';
       var height = attributes.height || '100%';
+      **/
+
+      // 6/27/2016 RL hardcode width and height for testing
+      var width="100%";
+      var height="480px";
 
       // Bug: Passing a jQuery object causes an infinite loop within Angular. Fail hard telling
       // users that they should pass us a jQuery expression as string instead.
       if ((((scope.options || {}).legend || {}).container) instanceof jQuery) {
         throw new Error('Please use a jQuery expression string with the "legend.container" option.');
       }
-
+      
+      // 6/27/2016 RL: begin
+      // if no dataset and options, inject an artificial dataset
       if (!scope.dataset) {
-        scope.dataset = [];
+        scope.dataset = [{ data: [], yaxis: 1, label: 'sin' }];
+        for (var i = 0; i < 14; i += 0.5) {
+          scope.dataset[0].data.push([i, Math.sin(i)]);
+        }
       }
 
       if (!scope.options) {
         scope.options = {
           legend: {
-            show: false
+            container: '#legend',
+            show: true
           }
         };
       }
+      
+      // 6/27/2016 RL: end
 
       var plotArea = $(element.children()[0]);
 
@@ -134,6 +150,7 @@ angular.module('angular-flot', []).directive('flot', ['$timeout', function ($tim
 
       var unwatchDataset = scope.$watch('dataset', onDatasetChanged, true);
 
+/**
       attributes.$observe('width', function (value) {
         if (!value) return;
         width = value;
@@ -145,7 +162,7 @@ angular.module('angular-flot', []).directive('flot', ['$timeout', function ($tim
         height = value;
         plotArea.css('height', value);
       });
-
+**/
       //
       // Tear Down
       //
