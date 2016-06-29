@@ -7,7 +7,7 @@
 // for google charts only; can be removed for quindar 
 google.load('visualization', '1', {'packages':['corechart']});
 
-var app = angular.module("app", ['gridster', 'ui.bootstrap', 'ui.router','angular-groundtrack','d3']);
+var app = angular.module("app", ['gridster', 'ui.bootstrap', 'ui.router','angular-groundtrack','d3','angular-lineplot']);
 
 // ui.router definitions
  app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -150,13 +150,13 @@ app.controller('dashboardController', ['$scope', '$timeout','d3',
         widgets: [{
           col: 0,
           row: 0,
-          sizeY: 1,
-          sizeX: 2,
+          sizeY: 3,
+          sizeX: 4,
           name: "Page 1 - Line Plot",
-          directive: "quindarlinechart"
+          directive: "lineplot"
         }, {
           col: 2,
-          row: 0,
+          row: 3,
           sizeY: 1,
           sizeX: 1,
           name: "Page 1- Countdown Clock",
@@ -251,7 +251,7 @@ app.controller('dashboardController', ['$scope', '$timeout','d3',
     var widgetDefinitions = [
       {
         name: 'Line Plot',
-        directive: 'quindarlinechart',
+        directive: 'lineplot',
         style: {
           width: '33%'
         }
@@ -273,7 +273,7 @@ app.controller('dashboardController', ['$scope', '$timeout','d3',
       },
       {
         name: 'Ground Track',
-        directive: 'wt-random',
+        directive: 'groundtrack',
         dataAttrName: 'chart',
         style: {
           width: '50%'
