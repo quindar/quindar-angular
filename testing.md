@@ -14,7 +14,7 @@ Testing of the backend involves running a sequence of API calls in parallel.
 curl -s GET http://platform.audacy.space:7902/services/v1/attitude/IBEX/5 >> /dev/null
 ```
 
-Backend testing is handled by running the shell script "systemLoadTest.sh".
+Backend testing is handled by running the shell script "backendLoadTest.sh".
 * This script runs through each type of API call in sequence and outputs the total amount of time taken for the given number of calls.
 * This test will automatically run the following tests:
   - Attitude GET
