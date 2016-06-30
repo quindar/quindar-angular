@@ -17,15 +17,15 @@ curl -s GET http://platform.audacy.space:7902/services/v1/attitude/IBEX/5 >> /de
 Backend testing is handled by running the shell script "backendLoadTest.sh".
 * This script runs through each type of API call in sequence and outputs the total amount of time taken for the given number of calls.
 * This test will automatically run the following tests:
-  - Attitude GET
-  - Attitude POST
-  - RabbitMQ Simulation
-  - RabbitMQ
-  - Metrics GET
+  - Attitude GET (attitudeGetTest.sh)
+  - Attitude POST (attitudePostTest.sh)
+  - RabbitMQ Simulation (rabbitMQSimTest.sh)
+  - RabbitMQ (rabbitMQTest.sh)
+  - Metrics GET (metricsTest.sh)
 * Optional tests can also be added:
-  - Position GET
-  - Orbit GET
-  - Vehicle GET
+  - Position GET (positionGetTest.sh)
+  - Orbit GET (orbitGetTest.sh)
+  - Vehicle GET (vehicleGetTest.sh)
 
 ## Frontend Testing
 Testing of the frontend uses PhantomJS to automatically test the web page with multiple users.
