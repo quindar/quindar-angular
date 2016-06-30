@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## System Load Test
+## Backend Load Test
 ##
 ## Written by: Sam Avery
 ## 6/30/16
