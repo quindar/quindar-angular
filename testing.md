@@ -4,7 +4,7 @@ Updated: June 30, 2016
 This document depicts how to perform backend and frontend testing.
 
 ## Summary
-Tests may be performed on the backend by performing a specified number of concurrent API calls or tests may be performed on the frontend using PhantomJS to simulate multiple users accessing the webpage.
+Tests may be performed on the backend by generating a specified number of concurrent API calls, or tests may be performed on the frontend by using PhantomJS to simulate multiple users accessing the webpage.
 
 ## Backend Testing
 Testing of the backend involves running a sequence of API calls in parallel.
