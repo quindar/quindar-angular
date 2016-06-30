@@ -35,6 +35,12 @@ The widgets are grouped into the following categories:
 * Time Views
 * Input Modules
 
+# Hw to use install Quindar
+* Download quindar-angular
+* Run buildme.sh
+* run server.js: node server.js
+* Open Quindar: localhost:####/index.html
+
 # How to Use Widgets
 The widgets will be available in at least 2 ways:
 * AngularJS directives
