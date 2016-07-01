@@ -3,19 +3,25 @@
 ## Backend Load Test
 ##
 ## Written by: Sam Avery
-## 6/30/16
+## UPDATE: 7/1/16
 ##
 ## This script runs a series of shell scripts to test different aspects
 ## of the backend.
 ##
 
 # Specify only the REAL time format, or total time for testing
-TIMEFORMAT="%R"
+# TIMEFORMAT="%R"
+
+# REAL time means the actual time it has taken the total process to complete
+# USER time is the time the CPU spends outside the kernel in the process
+# SYS time is the time the CPU spends inside the kernel in the process
+#
+# USER + SYS provides the total time the CPU spend on the process
 
 # Specify the Number of Users (N) to test
 N=50
 
-printf "Testing ATTITUDE GET... Run Time [s] ($N Users) = "
+printf "\nTesting ATTITUDE GET... Run Time [s] ($N Users)"
 time {
 for (( i=1; i<=$N; i++));
 do
@@ -23,7 +29,7 @@ do
 done
 }
 
-# printf "Testing POSITION GET... Run Time [s] ($N Users) = "
+# printf "\nTesting POSITION GET... Run Time [s] ($N Users)"
 # time {
 # for (( i=1; i<=$N; i++));
 # do
@@ -31,7 +37,7 @@ done
 # done
 # }
 
-# printf "Testing VEHICLE GET... Run Time [s] ($N Users) = "
+# printf "\nTesting VEHICLE GET... Run Time [s] ($N Users)"
 # time {
 # for (( i=1; i<=$N; i++));
 # do
@@ -39,7 +45,7 @@ done
 # done
 # }
 
-# printf "Testing ORBIT GET... Run Time [s] ($N Users) = "
+# printf "\nTesting ORBIT GET... Run Time [s] ($N Users)"
 # time {
 # for (( i=1; i<=$N; i++));
 # do
@@ -47,7 +53,7 @@ done
 # done
 # }
 
-printf "Testing ATTITUDE POST... Run Time [s] ($N Users) = "
+printf "\nTesting ATTITUDE POST... Run Time [s] ($N Users)"
 time {
 for (( i=1; i<=$N; i++));
 do
@@ -55,7 +61,7 @@ do
 done
 }
 
-printf "Testing RABBITMQ SIMULATION... Run Time [s] ($N Users) = "
+printf "\nTesting RABBITMQ SIMULATION... Run Time [s] ($N Users)"
 time {
 for (( i=1; i<=$N; i++));
 do
@@ -63,7 +69,7 @@ do
 done
 }
 
-printf "Testing RABBITMQ... Run Time [s] ($N Users) = "
+printf "\nTesting RABBITMQ... Run Time [s] ($N Users)"
 time {
 for (( i=1; i<=$N; i++));
 do
@@ -71,7 +77,7 @@ do
 done
 }
 
-printf "Testing METRICS GET... Run Time [s] ($N Users) = "
+printf "\nTesting METRICS GET... Run Time [s] ($N Users)"
 time {
 for (( i=1; i<=$N; i++));
 do
