@@ -72,7 +72,8 @@ The *time* command is used in each shell script to output information about the 
 * USER time is the time the CPU spends outside the kernel in the process
 * SYS time is the time the CPU spends inside the kernel in the process
 
-* USER + SYS provides the total time the CPU spend on the process
+* USER + SYS provides the total CPU execution time
+* Keep in mind that REAL does not necessarily equal USER + SYS because the CPU can run multiple processes at the same time.
 
 For more information about the *time* command, check out this stackoverflow post:
 [What do 'real', 'user' and 'sys' mean in the output of time?](http://stackoverflow.com/questions/556405/what-do-real-user-and-sys-mean-in-the-output-of-time1/556411#556411)
