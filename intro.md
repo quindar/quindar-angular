@@ -1,12 +1,10 @@
-An example with a Quindar Angular:
-Quindar Angualr is on github at: github.com/audacyDevOps/quindar-angualr
+#An example with a Quindar Angular:
 
-The code generates this dashboard:
-
+Quindar Angualr is on github at: github.com/audacyDevOps/quindar-angualr.
 
 If you clone the code, build the app, and run it on a local server, it will work well, but there is plenty of room to grow for developers. This is where grunt and napa come into play.
 
-First install Quindar Angular:
+###First Install Quindar Angular:
 Create a new temporary folder on your desktop or wherever you prefer and clone the quindar-angular github into it.
 
 If you open the index.html in an editor, you’ll notice about 25 lines that call external scripts either stored locally or via cdn. We will be using grunt and napa to concatenate and minify these files, as well as monitor them to update changes that you make.
@@ -73,34 +71,24 @@ module.exports = function(grunt) { //all Gruntfiles have this heading, otherwise
 		//first javascript
 	    js: { 
 		//src list files to concatenate
-	        src: ['app/angular.min.js', 'app/angular-ui-router.min.js', 'app/pace.min.js', 
-     'app/jquery.min.js', 'app/bootstrap.min.js',
-                    'app/jquery.blockUI.min.js', 'app/ui-bootstrap-tpls.min.js',
- 'app/scripts/angular-gridster..min.js'], 
-//dest writes a new file with concatenated javascript files according to the path
-       dest: 'app/concat.js' 
+	        src: ['app/angular.min.js', 'app/angular-ui-router.min.js', 'app/pace.min.js', 'app/jquery.min.js', 'app/bootstrap.min.js', 'app/jquery.blockUI.min.js', 'app/ui-bootstrap-tpls.min.js', 'app/scripts/angular-gridster..min.js'], 
+		//dest writes a new file with concatenated javascript files according to the path
+		 dest: 'app/concat.js' 
 	    },
 	//same process with second batch of .js files, please note order matters which is why we
 	// have two concatenated .js files as they are split up by other calls in the index.html
         js2: { 
             src: ['app/jsapi', 'app/controllers/indexControllers.js', 'app/directives/indexDirectives.js',
- 'app/directives/angular-groundtrack.js',
-                         'app/directives/factory-groundtrack.js',  
- 		 'app/scripts/plugins/visualization/d3/topojson.js', 'socket.io.min.js',
-                    'app/jquery.flot.min.js', 'app/scripts/js/jquery.flot.resize.js', 
-'app/scripts/js/jquery.flot.axislabels.js',
-                    'app/scripts/js/jquery.flot.navigate.js', 'app/scripts/js/jquery.flot.selection.js', 
-'app/scripts/js/jquery.flot.time.js',
-                    'app/directives/angular-lineplot.js', 'app/controllers/app-lineplot.js'],
+            	  'app/directives/angular-groundtrack.js', 'app/directives/factory-groundtrack.js',
+            	  'app/scripts/plugins/visualization/d3/topojson.js', 'socket.io.min.js',
+            	  'app/jquery.flot.min.js', 'app/scripts/js/jquery.flot.resize.js', 'app/scripts/js/jquery.flot.axislabels.js',
+                  'app/scripts/js/jquery.flot.navigate.js', 'app/scripts/js/jquery.flot.selection.js', 'app/scripts/js/jquery.flot.time.js', 'app/directives/angular-lineplot.js', 'app/controllers/app-lineplot.js'],
             dest: 'app/concat2.js'
         },
 	   //now css
 	    css: { 
-		src: ['app/bootstrap.min.css', 'app/stles/styles.css', 'app/styles/core.css', 
-                   		 'app/styles/component.css', 'app/styles/colors.css',
- 	'app/stlys/angular-gridster.min.css',
-                   		 'app/styles/gridsterDashboard.css', 'app/styles/index08.css',	
-'app/styles/widgets.css'], 
+		src: ['app/bootstrap.min.css', 'app/stles/styles.css', 'app/styles/core.css', 'app/styles/component.css',
+		      'app/styles/colors.css','app/stlys/angular-gridster.min.css','app/styles/gridsterDashboard.css', 'app/styles/index08.css', 'app/styles/widgets.css'], 
 		dest: 'app/concat.css' 
 	      }
 	  },
@@ -109,7 +97,6 @@ module.exports = function(grunt) { //all Gruntfiles have this heading, otherwise
 	    js: {
 			//which files to watch
 			files: ['app/**/*.js', 'app/*.js', 'app/scripts/plugins/visualization/d3/8.js'], 
-			
 			tasks: ['concat'] 
 	         },
 	    css: {
@@ -122,8 +109,7 @@ module.exports = function(grunt) { //all Gruntfiles have this heading, otherwise
 
 	  //uglify minifies concat.js for faster loading
 	  uglify: { 
-         		my_target: {
-		
+             my_target: {
 		  files: {
 			//minified file 'quindar-scripts.min.js’ from ‘concat.js'
 			'app/quindar-scripts.min.js': ['app/concat.js'],
@@ -142,26 +128,26 @@ module.exports = function(grunt) { //all Gruntfiles have this heading, otherwise
     			files: {
 				//minified file 'quindar-styles.min.js' from ‘concat.css’
       				'app/quindar-styles.min.css': ['app/concat.css']
-    				}                                             
+    			     }                                             
   		  	}
-	  },
-      processhtml: {
+		 },
+         processhtml: {
 
              build: {
-             files: {                         	 //reads 'index.html' and rewrites script calls from
+             files: {                          //reads 'index.html' and rewrites script calls from
                 'index.html' : ['index.html']  //multiple files to call from the one minified file.
-             }                                 	//index.html can be renamed as a new file, but we keep 
-	        }                                    //the destination as the same name, 'index.html'
+             	  }                             //index.html can be renamed as a new file, but we keep 
+	        }                               //the destination as the same name, 'index.html'
         },
 
-// copy moves the cdn files from node_modules to the more helpful root directory
-// you can add the command “grunt copy” under “npm install” in buildme.sh if you want to
-// have the files copy automatically after install
+	// copy moves the cdn files from node_modules to the more helpful root directory
+	// you can add the command “grunt copy” under “npm install” in buildme.sh if you want to
+	// have the files copy automatically after install
         copy: {
           main: {
 	// each chunk below defines the path to the file (cwd) and the files to copy over (src)
 	// as well as their destination (dest). In our case dest is always “app/” as our root
-// directory
+	// directory
             files: [{
                 expand: true,
                 cwd: 'node_modules/bootstrapcdn',
@@ -233,8 +219,8 @@ module.exports = function(grunt) { //all Gruntfiles have this heading, otherwise
     });
 	
 	
-//these lines add loads in information about the tasks called when running grunt. We did not
-// write the tasks ourselves so we have to load them from a third party
+	//these lines add loads in information about the tasks called when running grunt. We did not
+	// write the tasks ourselves so we have to load them from a third party
   	grunt.loadNpmTasks('grunt-contrib-concat'); 
  	grunt.loadNpmTasks('grunt-contrib-watch');  
   	grunt.loadNpmTasks('grunt-contrib-uglify'); 
@@ -243,10 +229,10 @@ module.exports = function(grunt) { //all Gruntfiles have this heading, otherwise
   	grunt.loadNpmTasks('grunt-processhtml');
   	grunt.loadNpmTasks('grunt-dev-update');
 
-//Each function is called a task, so we have to call the tasks we want. Pass in a name
-// you want, and the tasks listed above you want to run when you call this task.
-// If you use ‘default’ as your name, the tasks will run by only calling “grunt” in cmd or 
-// terminal 
+	//Each function is called a task, so we have to call the tasks we want. Pass in a name
+	// you want, and the tasks listed above you want to run when you call this task.
+	// If you use ‘default’ as your name, the tasks will run by only calling “grunt” in cmd or 
+	// terminal 
 
 	// uncomment the following line to automate the process, but we recommend working
 	// through it manually on the first attempt so you get a feel for the logic.
