@@ -71,9 +71,9 @@ Now you can use grunt. Create a new file in the root directory of quindar-angula
 
 In your editor add the following code:
 ```javascript
-module.exports = function(grunt) { //all Gruntfiles have this heading, otherwise they don’t run
-	grunt.initConfig({ //the information to configure grunt tasks, this runs at the beginning of 
-     //each task. Below are the settings for each task
+module.exports = function(grunt) {   //all Gruntfiles have this heading, otherwise they don’t run
+	grunt.initConfig({ 	     //the information to configure grunt tasks, this runs at the beginning of 
+     				     //each task. Below are the settings for each task
 
 		 //concat concatenates all local js and css files together respectively
 	 concat: {
