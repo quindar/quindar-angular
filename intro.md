@@ -263,7 +263,22 @@ Likewise after the chunk of calls, add:
 ```
 To signify that this chunk is contained between the “build” and “/build” comments.
 
-When grunt reads these comments and replaces the lines in between to call only the file specified in the “build” comment. This dramatically saves loading time, since we are calling 2-3 scripts rather than 25, including cdn calls which now are stored locally.
+When grunt reads these comments and replaces the lines in between to call only the file specified in the “build” comment. This dramatically saves loading time, since we are calling 2-3 scripts rather than 25, including cdn calls which now are stored locally:
+
+```html
+ <!-- build:css 'app/quindar-styles.min.css -->
+  <link type="text/css" rel="stylesheet" href="app/styles/styles.css">
+  <link type="text/css" rel="stylesheet" href="app/styles/core.css">
+  <link type="text/css" rel="stylesheet" href="app/styles/components.css">
+  <link type="text/css" rel="stylesheet" href="app/styles/colors.css">
+  <link rel="stylesheet" href="app/styles/angular-gridster.min.css" />
+  <link rel="stylesheet" href="app/styles/gridsterDashboard.css" />
+  <!--/build-->
+```
+Becomes:
+```htlml
+<script src="app/concat.js"></script>
+```
 
 Everything is ready to go. Make sure you have built app by running ./buildme.sh, then try your first grunt call:
 ```
