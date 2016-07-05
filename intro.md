@@ -277,7 +277,7 @@ When grunt reads these comments and replaces the lines in between to call only t
 ```
 Becomes:
 ```htlml
-<script src="app/concat.js"></script>
+<script src="app/quindar-styles.css"></script>
 ```
 
 Everything is ready to go. Make sure you have built app by running ./buildme.sh, then try your first grunt call:
