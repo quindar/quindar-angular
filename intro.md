@@ -54,7 +54,14 @@ Luckily grunt will help us replace these files to a more helpful location. But f
 ```
 When you run npm install it will install all the grunt devDependencies we need to run our grunt tasks.
 
-Since the buildme.sh calls npm install, simply run buildme.sh:
+(Note: if you have trouble installing grunt, you will have to sudo install it and its command line interface:
+```
+$ sudo npm install grunt --save-dev      //then enter your computer password
+$ sudo npm install grunt-cli --save-dev  //then enter your computer password
+```
+)
+
+Since the buildme.sh calls npm install, you can simply run buildme.sh instead of npm install. Eiter works:
 ```
 $ ./buildme.sh
 ```
