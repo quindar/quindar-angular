@@ -282,7 +282,7 @@ Becomes:
 
 Everything is ready to go. Make sure you have built app by running ./buildme.sh, then try your first grunt call:
 ```
-$grunt copy
+$ grunt copy
 ```
 Look in the app folder and all the cdn files you listed should be present. Now walk through the process one call at a time and you should be able to see the working dashboard at your locla port 3000:
 ```
