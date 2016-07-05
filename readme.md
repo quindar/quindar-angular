@@ -46,7 +46,7 @@ The widgets will be available in at least 2 ways:
 * AngularJS directives
 AngularJS directives are similar to HTML buttons that developers find in many Web pages. They can add these directives in your Web pages, similar to adding buttons or "div" tags. Each directive denotes a widget function, with associated backend data sources you can configure or customize).
 
-# How to Create a Widget
+# How to Create a New Widget
 1. Create a directive file and other necessary files in appropriate folders.
 1. Modify the Quindar index.html to add necessary source links.
 1. Make sure there are no dependencies in the controller file, i.e., no [] in the module definition line, 
