@@ -54,7 +54,7 @@ AngularJS directives are similar to HTML buttons that developers find in many We
 1. Add 'app' as a dependency to the directive file.
 1. Make sure no scopes are defined in the directive file.
 1. Make sure if the controller is linked by adding a line, controller: 'controller_name', to the directive.
-1. Modify widgetDefinitions and $scope.dashboard so that the new widget is available. 
+2. Modify widgetDefinitions and $scope.dashboard so that the new widget is available. 
 
 * JavaScript functions
 If developers want to modify or extend these directives, they may want to consider native JavaScript functions for these widget functionalities. The choice of JavaScript functions is targeted for short learning curve and the popularity of JavaScript across different software platforms (e.g. MEAN stack).
