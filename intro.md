@@ -15,7 +15,7 @@ In package.json add the following to the scripts section:
 “scripts”: {
 	…
 	…
-	“Install”: “napa”
+	“install”: “napa”
 },
 ```
 Then add a napa section:
@@ -58,6 +58,8 @@ Since the buildme.sh calls npm install, simply run buildme.sh:
 ```
 $ ./buildme.sh
 ```
+
+###Grunt
 Now you can use grunt. Create a new file in the root directory of quindar-angular (you should still be in this directory) and call it (Capital G!) Gruntfile.js.
 
 In your editor add the following code:
@@ -244,6 +246,7 @@ module.exports = function(grunt) { //all Gruntfiles have this heading, otherwise
 ```
 Almost done! We just need to edit “index.html” so it is configured for the processhtml task.
 
+###Editing index.html
 In your editor open index.html and you will notice the excessive script calls to cdns and local files. Grunt will concatenate those files, so if you already copied the addresses into package.json under napa, you will no longer need those lines. Rather than deleting them, however, grunt knows how to replace them.
 
 By adding special comments to index.html in select places, you can instruct grunt to replace those calls with one line that calls a minified file instead. 
@@ -285,3 +288,5 @@ Which will monitor changes that occur, and rerun concat. To see the changes imme
 So if you want to edit files and monitor effects instantaneously, add uglify and minify to your list of tasks called under watch, and use nodemon instead of node to run your local server.
 
 Napa and grunt used with npm automates several tasks to make development easier, and your web app faster.
+
+######Updated 7/5/2016 by Michael McKenna
