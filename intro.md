@@ -4,6 +4,10 @@ Quindar Angualr is on github at: github.com/audacyDevOps/quindar-angualr.
 
 If you clone the code, build the app, and run it on a local server, it will work well, but there is plenty of room to grow for developers. This is where grunt and napa come into play.
 
+It should be noted that this example uses the quindar-angular application wherein the index.html calls each file individually. This is
+the old format for creating quindar apps. The new format for creating quindar app will involve fewer calls to begin with as our files on
+our github will be aggregated together.
+
 ###Install Quindar Angular
 Create a new temporary folder on your desktop or wherever you prefer and clone the quindar-angular github into it.
 
