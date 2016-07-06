@@ -286,6 +286,7 @@ Becomes:
 ```htlml
 <script src="app/quindar-styles.css"></script>
 ```
+(Note: since there are two chunks of .js file calls, we have two different minified files quindar-scripts.min.js and quindar-scripts2.min.js. It also should be noted the second chunk of .js file calls has a .css file call in the middle, so one sets of "build-/build" should be placed on either side of the .css file call which can be left alone.)
 
 Everything is ready to go. Make sure you have built app by running ./buildme.sh, then try your first grunt call:
 ```
