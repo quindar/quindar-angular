@@ -23,7 +23,7 @@ Then add a napa section:
 “napa”: {
 	// cdn file calls go here
 	“nameYouChoose”: “https://example.com/path/to/file/file.min.css”,
-	…,
+	...
 	...
 }
 ```
