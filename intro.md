@@ -79,24 +79,20 @@ module.exports = function(grunt) {   //all Gruntfiles have this heading, otherwi
 	 concat: {
         //first javascript
         js: { 
-        //src list files to concatenate
+        //src list .js files to concatenate. Example: 'app/scripts/angular-gridster.min.js.
+        //since we moved the cdn files to the 'app' folder (see 'copy' taks below), each of their
+        //paths is 'app/examplefile.ext'. Please note that oder matters. the list should be sorted by call
+        //order in index.html
             src: ['app/angular.min.js', 'app/angular-ui-router.min.js', 'app/pace.min.js', 
                  'app/jquery.min.js', 'app/bootstrap.min.js','app/jquery.blockUI.min.js', 
-                 'app/ui-bootstrap-tpls.min.js','app/scripts/angular-gridster.min.js'], 
-        //dest writes a new file with concatenated javascript files according to the path
-       dest: 'app/concat.js' 
-        },
-        //same process with second batch of .js files, please note order matters which is why we
-        // have two concatenated .js files as they are split up by other calls in the index.html
-        js2: { 
-            src: ['app/jsapi', 'app/controllers/indexControllers.js', 'app/directives/indexDirectives.js',
-                    'app/directives/angular-groundtrack.js','app/factories/factory-groundtrack.js',  
+                 'app/ui-bootstrap-tpls.min.js','app/scripts/angular-gridster.min.js','app/jsapi', 'app/controllers/indexControllers.js', 'app/directives/indexDirectives.js', 'app/directives/angular-groundtrack.js','app/factories/factory-groundtrack.js',  
                     'app/scripts/plugins/visualization/d3/topojson.js', 'app/socket.io.min.js',
                     'app/jquery.flot.min.js', 'app/scripts/js/jquery.flot.resize.js', 
                     'app/scripts/js/jquery.flot.axislabels.js','app/scripts/js/jquery.flot.navigate.js', 
                     'app/scripts/js/jquery.flot.selection.js', 'app/scripts/js/jquery.flot.time.js',
-                    'app/directives/angular-lineplot.js', 'app/controllers/app-lineplot.js'],
-            dest: 'app/concat2.js'
+                    'app/directives/angular-lineplot.js', 'app/controllers/app-lineplot.js'], 
+        //dest writes a new file with concatenated javascript files according to the path
+       dest: 'app/concat.js' 
         },
        //now css
         css: { 
@@ -127,8 +123,6 @@ module.exports = function(grunt) {   //all Gruntfiles have this heading, otherwi
 		  files: {
 			//minified file 'quindar-scripts.min.js’ from ‘concat.js'
 			'app/quindar-scripts.min.js': ['app/concat.js'],
-			//minified file 'quindar-scripts2.min.js' from ‘concat2.js’
-           			 'app/quindar-scripts2.min.js': ['app/concat2.js'] 
 			}                          
 		  }
 	   },
@@ -239,9 +233,8 @@ module.exports = function(grunt) {   //all Gruntfiles have this heading, otherwi
  	grunt.loadNpmTasks('grunt-contrib-watch');  
   	grunt.loadNpmTasks('grunt-contrib-uglify'); 
   	grunt.loadNpmTasks('grunt-contrib-cssmin');
-   	 grunt.loadNpmTasks('grunt-contrib-copy');
+   	grunt.loadNpmTasks('grunt-contrib-copy');
   	grunt.loadNpmTasks('grunt-processhtml');
-  	grunt.loadNpmTasks('grunt-dev-update');
 
 	//Each function is called a task, so we have to call the tasks we want. Pass in a name
 	// you want, and the tasks listed above you want to run when you call this task.
@@ -291,7 +284,7 @@ Becomes:
 ```htlml
 <script src="app/quindar-styles.css"></script>
 ```
-(Note: since there are two chunks of .js file calls, we have two different minified files quindar-scripts.min.js and quindar-scripts2.min.js. It also should be noted the second chunk of .js file calls has a .css file call in the middle, so one sets of "build-/build" should be placed on either side of the .css file call which can be left alone. Furthermore, the call to Roboto should not be concatenated and should be left alone.)
+(Note: since there are two chunks of .js file calls, we have to have two separate sets of "build tags" otherwise processhtml will remove all the code in between those chunks. It also should be noted the second chunk of .js file calls has a .css file call in the middle, so one sets of "build-/build" should be placed on either side of the .css file call which can be left alone. Furthermore, the call to Roboto should not be concatenated and should be left alone.)
 
 Everything is ready to go. Make sure you have built app by running ./buildme.sh, then try your first grunt call:
 ```
