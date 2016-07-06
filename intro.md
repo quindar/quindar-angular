@@ -157,15 +157,15 @@ module.exports = function(grunt) {   //all Gruntfiles have this heading, otherwi
 	// copy moves the cdn files from node_modules to the more helpful root directory
 	// you can add the command “grunt copy” under “npm install” in buildme.sh if you want to
 	// have the files copy automatically after install
-        copy: {
+       copy: {
           main: {
-	// each chunk below defines the path to the file (cwd) and the files to copy over (src)
-	// as well as their destination (dest). In our case dest is always “app/” as our root
-	// directory
+    // each chunk below defines the path to the file (cwd) and the files to copy over (src)
+    // as well as their destination (dest). In our case dest is always “app/” as our root
+    // directory
             files: [{
                 expand: true,
                 cwd: 'node_modules/bootstrapcdn',
-                src: '*.js',
+                src: '*.css',
                 dest: 'app/',
             },
             {
