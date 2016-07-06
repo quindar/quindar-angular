@@ -35,13 +35,11 @@ Luckily grunt will help us replace these files to a more helpful location. But f
 ```javascript
 “devDependencies”:{
     "grunt": "1.0.1",
-    "grunt-contrib-clean": "1.0.0",
     "grunt-contrib-concat": "1.0.1",
     "grunt-contrib-copy": "1.0.0",
     "grunt-contrib-cssmin": "1.0.1",
     "grunt-contrib-uglify": "1.0.1",
     "grunt-contrib-watch": "1.0.0",
-    "grunt-dev-update": "2.0.0",
     "grunt-processhtml": "0.4.0",
     "load-grunt-tasks": "3.5.0",
     "napa": "2.3.0",
