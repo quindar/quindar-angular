@@ -75,32 +75,37 @@ module.exports = function(grunt) {   //all Gruntfiles have this heading, otherwi
 	grunt.initConfig({ 	     //the information to configure grunt tasks, this runs at the beginning of 
      				     //each task. Below are the settings for each task
 
-		 //concat concatenates all local js and css files together respectively
+	 //concat concatenates all local js and css files together respectively
 	 concat: {
-		//first javascript
-	    js: { 
-		//src list files to concatenate
-	        src: ['app/angular.min.js', 'app/angular-ui-router.min.js', 'app/pace.min.js', 'app/jquery.min.js', 'app/bootstrap.min.js', 'app/jquery.blockUI.min.js', 'app/ui-bootstrap-tpls.min.js', 'app/scripts/angular-gridster..min.js'], 
-		//dest writes a new file with concatenated javascript files according to the path
-		 dest: 'app/concat.js' 
-	    },
-	//same process with second batch of .js files, please note order matters which is why we
-	// have two concatenated .js files as they are split up by other calls in the index.html
+        //first javascript
+        js: { 
+        //src list files to concatenate
+            src: ['app/angular.min.js', 'app/angular-ui-router.min.js', 'app/pace.min.js', 
+                 'app/jquery.min.js', 'app/bootstrap.min.js','app/jquery.blockUI.min.js', 
+                 'app/ui-bootstrap-tpls.min.js','app/scripts/angular-gridster.min.js'], 
+        //dest writes a new file with concatenated javascript files according to the path
+       dest: 'app/concat.js' 
+        },
+        //same process with second batch of .js files, please note order matters which is why we
+        // have two concatenated .js files as they are split up by other calls in the index.html
         js2: { 
             src: ['app/jsapi', 'app/controllers/indexControllers.js', 'app/directives/indexDirectives.js',
-            	  'app/directives/angular-groundtrack.js', 'app/directives/factory-groundtrack.js',
-            	  'app/scripts/plugins/visualization/d3/topojson.js', 'socket.io.min.js',
-            	  'app/jquery.flot.min.js', 'app/scripts/js/jquery.flot.resize.js', 'app/scripts/js/jquery.flot.axislabels.js',
-                  'app/scripts/js/jquery.flot.navigate.js', 'app/scripts/js/jquery.flot.selection.js', 'app/scripts/js/jquery.flot.time.js', 'app/directives/angular-lineplot.js', 'app/controllers/app-lineplot.js'],
+                    'app/directives/angular-groundtrack.js','app/factories/factory-groundtrack.js',  
+                    'app/scripts/plugins/visualization/d3/topojson.js', 'app/socket.io.min.js',
+                    'app/jquery.flot.min.js', 'app/scripts/js/jquery.flot.resize.js', 
+                    'app/scripts/js/jquery.flot.axislabels.js','app/scripts/js/jquery.flot.navigate.js', 
+                    'app/scripts/js/jquery.flot.selection.js', 'app/scripts/js/jquery.flot.time.js',
+                    'app/directives/angular-lineplot.js', 'app/controllers/app-lineplot.js'],
             dest: 'app/concat2.js'
         },
-	   //now css
-	    css: { 
-		src: ['app/bootstrap.min.css', 'app/stles/styles.css', 'app/styles/core.css', 'app/styles/component.css',
-		      'app/styles/colors.css','app/stlys/angular-gridster.min.css','app/styles/gridsterDashboard.css', 'app/styles/index08.css', 'app/styles/widgets.css'], 
-		dest: 'app/concat.css' 
-	      }
-	  },
+       //now css
+        css: { 
+        src: ['app/bootstrap.min.css', 'app/stles/styles.css', 'app/styles/core.css', 'app/styles/components.css', 
+                'app/styles/colors.css','app/stlyes/angular-gridster.min.css','app/styles/gridsterDashboard.css', 
+                'app/styles/index08a.css', 'app/styles/icons/**/*', 'app/styles/fonts/*'], 
+        dest: 'app/concat.css' 
+          }
+      },
 	//watch monitors all local listed files for changes, then runs concat with the changed files
 	  watch: { 
 	    js: {
