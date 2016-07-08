@@ -154,64 +154,22 @@ app.controller('dashboardController', ['$scope', '$timeout','d3',
           sizeX: 4,
           name: "Page 1 - Line Plot",
           directive: "lineplot"
-        }, {
-          col: 2,
-          row: 3,
-          sizeY: 1,
-          sizeX: 1,
-          name: "Page 1- Countdown Clock",
-          directive: "wttime"
         }]
       },
       '2': {
         id: '2',
         name: 'Advanced',
-        widgets: [{
-          col: 0,
-          row: 1,
-          sizeY: 1,
-          sizeX: 3,
-          name: "Page 2 - Countdown Clock",
-          directive: "wttime"
-        }, {
-          col: 3,
-          row: 1,
-          sizeY: 1,
-          sizeX: 1,
-          name: "Page 2 - Thruster",
-          directive: "wttime"
-        }]
+        widgets: []
       },
       '3': {
         id: '3',
         name: 'Mission Operations',
-        widgets: [{
-          col: 0,
-          row: 0,
-          sizeY: 1,
-          sizeX: 1,
-          name: "Page 3 - Quindar Widget 1",
-          directive: "quindarpie"
-        }, {
-          col: 2,
-          row: 0,
-          sizeY: 1,
-          sizeX: 2,
-          name: "Page 3 - Quindar Widget 2",
-          directive: "quindarlinechart"
-        }]
+        widgets: []
       },
       '4': {
         id: '4',
         name: 'Ground Operations',
         widgets: [{
-          col: 1,
-          row: 1,
-          sizeY: 1,
-          sizeX: 3,
-          name: "Page 4 - Quindar Widget 3",
-          directive: "quindarpie"
-        }, {
           col: 0,
           row: 0,
           sizeY: 3,
@@ -223,21 +181,7 @@ app.controller('dashboardController', ['$scope', '$timeout','d3',
       '5': {
         id: '5',
         name: 'Custom',
-        widgets: [{
-          col: 0,
-          row: 1,
-          sizeY: 2,
-          sizeX: 4,
-          name: "Page 5 - Custom Widget 1",
-          directive: "wt-random"
-        }, {
-          col: 0,
-          row: 2,
-          sizeY: 2,
-          sizeX: 4,
-          name: "Page 5 - Telemetry: fuel breakdown",
-          directive: "quindarpie"
-        }]
+        widgets: []
       }
     };
 
@@ -276,7 +220,7 @@ app.controller('dashboardController', ['$scope', '$timeout','d3',
         directive: 'groundtrack',
         dataAttrName: 'chart',
         style: {
-          width: '50%'
+          width: '100%'
         }
       }
     ];

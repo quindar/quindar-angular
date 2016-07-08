@@ -12,10 +12,11 @@ ul {
 .box {
     height: 100%;
     border: 1px solid #ccc;
-    background-color: #fff;
+    background-color: #242833;
 }
 .box-header {
-    background-color: #eee;
+    background-color: #464954;
+	color: #1072A4;
     //padding: 0 30px 0 10px;
     padding: 0 3px 0 10px;
     border-top: 1px solid #ccc;
@@ -29,6 +30,7 @@ ul {
 }
 .box-content {
     padding: 5px;
+	background-color: #242833;
 }
 .box-header-btns {
     top: 7px;
@@ -44,4 +46,35 @@ form {
 }
 .gridster {
     border: 1px solid #ccc;
+	background-color: #242833;
+}
+
+.transition-hover-content {
+    opacity:0;   
+    -webkit-transition:.5s;
+    -moz-transition:.5s;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    transition:.5s;
+	height:1px;
+}
+ 
+.transition-hover:hover .transition-hover-content {
+    opacity:1;
+	height:40px;   
+}
+
+.header-transition-hover-content {
+    opacity:0;   
+    -webkit-transition:.5s;
+    -moz-transition:.5s;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    transition:.5s;
+	height:1px;
+}
+ 
+.header-transition-hover:hover .header-transition-hover-content {
+    opacity:1;
+	height:70px; 
 }
