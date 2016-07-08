@@ -8,21 +8,21 @@ angular.module('angular-lineplot',['app'])
   .directive('lineplot',[ function(){
 	return{
 	  restrict: 'EA',
-	  template: '<div class="col-sm-1"> \
+	  template: '<div class="col-sm-2"> \
 				   <form> \
 					 <select id = "sc" name="sc" class = "listlabel"> \
-					   <option value="Audacy1">Audacy1</option> \
-					   <option value="Audacy2">Audacy2</option> \
-					   <option value="Audacy3">Audacy3</option> \
+					   <option value="Audacy1">AUDACY1</option> \
+					   <option value="Audacy2">AUDACY2</option> \
+					   <option value="Audacy3">AUDACY3</option> \
 					 </select> \
 				   </form> \
 				 </div> \
 			     <div class="col-sm-1"> \
 				   <form> \
 					 <select id = "data" name="data" class = "listlabel"> \
-					   <option value="x">x</option> \
-					   <option value="y">y</option> \
-					   <option value="z">z</option> \
+					   <option value="x">X</option> \
+					   <option value="y">Y</option> \
+					   <option value="z">Z</option> \
 					 </select> \
 				   </form> \
 				 </div> \
@@ -81,7 +81,7 @@ angular.module('angular-lineplot',['app'])
 		    
 	        $('#dataStream').text(data_temp);
 		  };
-		  //alert(data_temp)
+
 	    });
 		
 	    var plot = null;
@@ -106,6 +106,7 @@ angular.module('angular-lineplot',['app'])
 		  series: {
 		  shadowSize: 0	// Drawing is faster without shadows
 		  },
+		  colors: ['#71ECF9'],
           points: {show: true,
 		           radius: 2,
                    lineWidth: 1,
@@ -122,18 +123,18 @@ angular.module('angular-lineplot',['app'])
 		  }],
 		  yaxis: {
 		    show: true,
-		    font:{family:"Open Sans", color:"#242833"},
+		    font:{family:"Open Sans", color:"#B8F6FC"},
 		    tickColor: "#464954",	
             axisLabelPadding:35,			
 		  },
 		  xaxis: {
 		    show: true,
 			mode: "time",
-			tickSize:[2,"second"],
 			//axisLabelUseCanvas: true,
 			axisLabelPadding: 15,			
-		    font:{family:"Open Sans", color:"#242833"},
+		    font:{family:"Open Sans", color:"#B8F6FC"},
 		    tickColor: "#464954",
+			//tickSize: [5, "second"],
 		  },
 		  grid: {
 		    show: true,
@@ -302,7 +303,7 @@ angular.module('angular-lineplot',['app'])
 		    data:data_plot2,
 		    //label:document.getElementById('sc').value,	
   		  }]);
-		
+		  
 		  // Since the axes don't change, we don't need to call plot.setupGrid()
 		  plot.draw();
 		  plot.getAxes().yaxis.options.axisLabel = dType;

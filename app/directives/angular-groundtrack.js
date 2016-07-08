@@ -32,34 +32,37 @@ angular.module('angular-groundtrack',['d3'])
             var timer;
 			var L_pts = 36000;	// Number of points on trajectory
 	        
-			var width = 950;
-			var height = 600;
+			//var width = attributes.width | 900;
+			//var height = 600;
  
 			// ground station locations
 			var dataset =[[-122.4194,37.7749],[-3.7038,40.4168],[103.8198,1.3521]];;
 			
-	        var projection = d3.geo.equirectangular()
-	                           .center([0,0])
-	                           .scale((width + 1) / 2 / Math.PI)
-						       .translate([width/2,height/2])
-                               .precision(.1);						   
-						   
-            var graticule = d3.geo.graticule();
-
-            var path = d3.geo.path()
-                         .projection(projection);
-
-            var graticule = d3.geo.graticule();
-
             var svg = d3.select(element[0]).append("svg")
-                        .attr("width", width)
-                        .attr("height", height)
+                        .attr("width", '100%')
+                        .attr("height", '480')
 						.attr("class", "ocean");
 
 	        var g = svg.append("g");
 	        var route = g.append("g");
             var plane = g.append("g");
       
+	        var width = svg.attr("width");
+			var height = svg.attr("height");
+			
+	  	    var projection = d3.geo.equirectangular()
+	                           .center([0,0])
+	                           //.scale((width + 1) / 2 / Math.PI)
+						       .translate([1010/2,height/2])
+                               .precision(.1);						   
+			   
+            var graticule = d3.geo.graticule();
+
+            var path = d3.geo.path()
+                         .projection(projection);
+
+            var graticule = d3.geo.graticule();
+			
             // Plot world map
             d3.json("../../images/world-110m.json", function(error, world) {
               if (error) throw error;

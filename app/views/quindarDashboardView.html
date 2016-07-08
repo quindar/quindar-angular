@@ -1,8 +1,8 @@
-<div class="page-header">
+<div class="page-header header-transition-hover-content">
 
 	<div class="pull-right dropdown">
   		<button ng-click="clearDropdownMenu = !clearDropdownMenu"
-  			class="btn btn-warning "> <i class="glyphicon glyphicon-trash btn-warning"></i> Clear </button>
+  			class="btn" style="color:#464954; background-color:#CFCFD5"> <i class="glyphicon glyphicon-trash"></i> Clear </button>
   		
   		<div id="clearDropdown" class="dropdown-content" ng-show="clearDropdownMenu">
   			<ul>
@@ -12,11 +12,11 @@
 			</ul>
   		</div>
 	</div>
-	<a class="pull-right btn btn-info" ng-click="saveWidgets()"><i class="glyphicon glyphicon-save"></i> Save </a>
+	<a class="pull-right btn" style="color:#464954; background-color:#CFCFD5" ng-click="saveWidgets()"><i class="glyphicon glyphicon-save"></i> Save </a>
 	
 	<div class="pull-right dropdown">
   		<button ng-click="addWidgetDropdownMenu = !addWidgetDropdownMenu" 
-  			class="btn btn-success"> 
+  			class="btn" style="color:#464954; background-color:#CFCFD5"> 
   			<i class="glyphicon glyphicon-plus"></i> Add Widgets </button>
   		
   		<div id="myDropdown" class="dropdown-content" ng-show="addWidgetDropdownMenu">
@@ -27,10 +27,10 @@
 			</ul>	<!-- ul tag fixed-->
   		</div>
 	</div>
-	<a class="pull-right btn btn-primary" ng-click="addPage()"><i class="glyphicon glyphicon-plus"></i> Add Page </a>
+	<a class="pull-right btn" style="color:#464954; background-color:#CFCFD5" ng-click="addPage()"><i class="glyphicon glyphicon-plus"></i> Add Page </a>
 	<h3 style="display: inline-block; width: 200px; margin-bottom: 30px;"> Dashboard </h3>
 
-	<select class="form-control" style="width: 180px; margin-bottom: 20px; display:inline-block;" 
+	<select class="form-control" style="width: 180px; margin-bottom: 20px; display:inline-block; background-color:#CFCFD5" 
 		ng-model="selectedDashboardId" 
 		ng-change="changeDashboard(selectedDashboardId)"
 		ng-options="d.id as d.name for d in dashboards | object2Array | orderBy:'id'">
@@ -40,8 +40,8 @@
 <div gridster="gridsterOptions">
 	<ul>
 		<li gridster-item="widget" ng-repeat="widget in dashboard.widgets">
-			<div class="box" ng-controller="CustomWidgetCtrl">
-				<div class="box-header">
+			<div class="box transition-hover" ng-controller="CustomWidgetCtrl">
+				<div class="box-header transition-hover-content">
 					<h5>{{ widget.name }}</h5>
 					<div class="box-header-btns pull-right">
 						<a title="settings" ng-click="openSettings(widget)">
