@@ -1,4 +1,4 @@
-// Program: indexDirectives.js
+// Program: quindarWidgetsDirectives.js
 // Purpose: AngularJS router for quindar dashboard
 // Author:  Ray Lai
 // Updated: May 18, 2016

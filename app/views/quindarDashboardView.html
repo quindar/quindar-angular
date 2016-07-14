@@ -31,7 +31,7 @@
 	<h3 style="display: inline-block; width: 200px; margin-bottom: 30px;"> Dashboard </h3>
 
 	<select class="form-control" style="width: 180px; margin-bottom: 20px; display:inline-block; background-color:#CFCFD5" 
-		ng-model="selectedDashboardId" 
+		ng-model="$parent.selectedDashboardId" 
 		ng-change="changeDashboard(selectedDashboardId)"
 		ng-options="d.id as d.name for d in dashboards | object2Array | orderBy:'id'">
 	</select>
