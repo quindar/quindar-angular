@@ -45,4 +45,4 @@ jspm_packages
 # others
 node_modules/
 tmp/
-
+.DS_Store

@@ -1,11 +1,8 @@
-// Program: indexController.js
+// Program: quindarWidgetsControllers.js
 // Purpose: AngularJS controller for quindar dashboard
 // Author:  Ray Lai
 // Updated: May 20, 2016
 // License: MIT license
-
-// for google charts only; can be removed for quindar 
-google.load('visualization', '1', {'packages':['corechart']});
 
 var app = angular.module("app", ['gridster', 'ui.bootstrap', 'ui.router','angular-groundtrack','d3','angular-lineplot']);
 
@@ -17,13 +14,10 @@ var app = angular.module("app", ['gridster', 'ui.bootstrap', 'ui.router','angula
       url: "/",
       views: {
         "sidebar": {
-           templateUrl: "app/views/sidebarUpdatedVersion.html"
+           templateUrl: "app/views/sidebar.html"
          },
          "body" : {
-           templateUrl: "app/views/bodyUpdatedVersion.html"
-         },
-         "footer": {
-           templateUrl: "app/views/footerUpdatedVersion.html"
+           templateUrl: "app/views/body.html"
          }
       }
   })
@@ -40,41 +34,10 @@ var app = angular.module("app", ['gridster', 'ui.bootstrap', 'ui.router','angula
       url: "/dashboard",
       views: {
         "sidebar": {
-           templateUrl: "app/views/sidebarUpdatedVersion.html"
+           templateUrl: "app/views/sidebar.html"
          },
          "dashboard" : {
            templateUrl: "app/views/quindarDashboardView.html"
-         }
-      },
-      controller: 'dashboardController'
-  })
-  .state("about", {
-      url: "/about",
-      views: {
-        "sidebar": {
-           templateUrl: "app/views/sidebarUpdatedVersion.html"
-         },
-         "body" : {
-           templateUrl: "app/views/aboutUpdatedVersion.html"
-         }
-      },
-      controller: 'aboutController'
-  })
-  .state('login', {
-      url:'/login',
-      views: {
-         "login" : {
-           templateUrl: "app/views/loginUpdatedVersion.html"
-         }
-      },
-      controller: 'loginController'
-  })
-  
-  .state("settings", {
-      url: "/settings",
-      views: {
-         "settings" : {
-           templateUrl: "app/views/quindarWidgetSettings.html"
          }
       },
       controller: 'dashboardController'
@@ -93,18 +56,6 @@ app.controller('homeController', ['$scope','$rootScope', function($scope, $rootS
   };
 
  }]);
-
-// controller for dashboard about page - placeholder
-app.controller('aboutController', ['$scope','$rootScope', function($scope, $rootScope) {
-  
-  // 5/20/2016 RL: Setting the page properties, set an example for $rootScope; unused yet
-  $rootScope.page = {
-    heading: 'About',
-    username: "Ray",
-    role: "user"
-  };
-
-}]);
 
 // controller for dashboard widget controller - unused
 app.controller('widgetController', ['$scope','$rootScope', function($scope, $rootScope) {
@@ -143,9 +94,10 @@ app.controller('dashboardController', ['$scope', '$timeout','d3',
     };
 
     // 5/20/2016 default quindar dashboard settings. change this section to add new widgets
-    $scope.dashboards = {
-      '1': {
-        id: '1',
+    // 7/12/2016 RayL: change data structure to array
+    $scope.dashboards = [
+      {
+        id: 0,
         name: 'Basic',
         widgets: [{
           col: 0,
@@ -156,18 +108,25 @@ app.controller('dashboardController', ['$scope', '$timeout','d3',
           directive: "lineplot"
         }]
       },
-      '2': {
-        id: '2',
+      {
+        id: 1,
         name: 'Advanced',
         widgets: []
       },
-      '3': {
-        id: '3',
+      {
+        id: 2,
         name: 'Mission Operations',
-        widgets: []
+        widgets: [{
+          col: 0,
+          row: 0,
+          sizeY: 3,
+          sizeX: 4,
+          name: "Page 3 - Battery",
+          directive: "lineplot"
+        }]
       },
-      '4': {
-        id: '4',
+      {
+        id: 3,
         name: 'Ground Operations',
         widgets: [{
           col: 0,
@@ -178,12 +137,12 @@ app.controller('dashboardController', ['$scope', '$timeout','d3',
           directive: "groundtrack"
         }]
       },
-      '5': {
-        id: '5',
+      {
+        id: 4,
         name: 'Custom',
         widgets: []
       }
-    };
+    ];
 
     $scope.defaultDashboards = JSON.parse(JSON.stringify($scope.dashboards));
     
@@ -201,21 +160,6 @@ app.controller('dashboardController', ['$scope', '$timeout','d3',
         }
       },
       {
-        name: 'Countdown Clock',
-        directive: 'wttime',
-        style: {
-          width: '33%'
-        }
-      },
-      {
-        name: 'Quindar Pie',
-        directive: 'quindarpie',
-        dataAttrName: 'chart',
-        style: {
-          width: '50%'
-        }
-      },
-      {
         name: 'Ground Track',
         directive: 'groundtrack',
         dataAttrName: 'chart',
@@ -229,8 +173,6 @@ app.controller('dashboardController', ['$scope', '$timeout','d3',
 
     var defaultWidgets = [
       { name: 'Line Plot' },
-      { name: 'Countdown Clock' },
-      { name: 'Quindar Pie' },
       { name: 'Ground Track' }
     ];
 
@@ -246,8 +188,9 @@ app.controller('dashboardController', ['$scope', '$timeout','d3',
       defaultWidgets: defaultWidgets
     };
 
-    $scope.selectedDashboardId = '1';
-    $scope.dashboard = $scope.dashboards[1];
+    //$scope.selectedDashboardId = '1';
+    $scope.selectedDashboardId = 0;
+    $scope.dashboard = $scope.dashboards[0];
 
     $scope.clearConfirmed = false;
     $scope.restoreDefaultConfirmed = false;
@@ -278,8 +221,8 @@ app.controller('dashboardController', ['$scope', '$timeout','d3',
     $scope.addWidget = function() {
       $scope.dashboard.widgets.push({
         name: "New Widget",
-        sizeX: 1,
-        sizeY: 1
+        sizeX: 4,
+        sizeY: 3
       });
     };
 
@@ -320,8 +263,8 @@ app.controller('dashboardController', ['$scope', '$timeout','d3',
     $scope.restoreWidgetDefault = function() {
       //console.log("restoreWidgetDefault() before restore= " + JSON.stringify($scope.defaultDashboards));
       $scope.dashboards = JSON.parse(JSON.stringify($scope.defaultDashboards));
-      $scope.selectedDashboardId = '1';
-      $scope.dashboard = $scope.dashboards[1];
+      $scope.selectedDashboardId = 0;
+      $scope.dashboard = $scope.dashboards[0];
       //console.log("restoreWidgetDefault() after restore= " + JSON.stringify($scope.dashboards));
     };
 
@@ -370,8 +313,8 @@ app.controller('dashboardController', ['$scope', '$timeout','d3',
         var widgetX = {
           col: 3,
           row: 1,
-          sizeY: 1,
-          sizeX: 2,
+          sizeY: 3,
+          sizeX: 4,
           name: newWidget.name,
           directive: newWidget.directive
         };
@@ -380,35 +323,39 @@ app.controller('dashboardController', ['$scope', '$timeout','d3',
       }      
     };
 
-    // 5/20/2016 RL: when adding new page, it will add 2 default widgets
+
+    // 5/20/2016 RayL: when adding new page, it will add 2 default widgets
     $scope.addPage = function() {
-      var nextPage = (Object.keys($scope.dashboards).length + 1).toString();
+      var nextPage = (Object.keys($scope.dashboards).length + 1);
       var newPage = {
-        id: nextPage,
+        id: nextPage - 1,
         name: "Custom - Page " + nextPage,
         widgets: [{
           col: 0,
           row: 1,
-          sizeY: 1,
-          sizeX: 2,
-          name: "Satellite - Temperature",
-          directive: "quindarlinechart"
-        }, {
-          col: 0,
-          row: 2,
-          sizeY: 1,
-          sizeX: 2,
-          name: "Satellite - Fuel",
-          directive: "quindarpie"
+          sizeY: 3,
+          sizeX: 4,
+          name: "Satellite - Telemetry",
+          directive: "lineplot"
         }]
       };
-      $scope.dashboards[nextPage] = newPage;   
+      //$scope.dashboards[nextPage] = newPage;  
+      $scope.dashboards.push(newPage); 
       // now to refresh. this is problematic since view-model does not refresh consistently
-  
-      $scope.changeDashboard(nextPage);
-      $scope.selectedDashboardId = nextPage;
-      $scope.dashboard = $scope.dashboards[nextPage];
+    
+      $scope.dashboard = $scope.dashboards[nextPage - 1];
+      $scope.selectedDashboardId = nextPage - 1;
+      $scope.changeDashboard(nextPage - 1);      
+          
     };
+
+    $scope.$watch('selectedDashboardId', function(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        $scope.dashboard = $scope.dashboards[newVal];
+      } else {
+        $scope.dashboard = $scope.dashboards[0];
+      }
+    });
   }
 ])
 
@@ -478,6 +425,7 @@ app.controller('dashboardController', ['$scope', '$timeout','d3',
 
   }
 ])
+// 7/13/2016 RayL: object2Array() not used after I changed dashboards[] data structure
 .filter('object2Array', function() {
   return function(input) {
     var out = [];

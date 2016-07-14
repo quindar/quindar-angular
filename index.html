@@ -26,7 +26,7 @@
   -->
 
   <!-- quindar dashboard style - drop-down style -->
-  <link rel="stylesheet" href="app/styles/index08a.css" />
+  <link rel="stylesheet" href="app/styles/quindarWidgets.css" />
 
   <!-- Dependencies: angularJS -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
@@ -85,31 +85,9 @@
         </li>
         <li ui-sref-active="active">
           <a ui-sref="dashboardnoborder">Custom Dashboard </a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref="about">About </a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref="login">Login </a>
-        </li>     
+        </li> 
         <!-- /User dropdown -->
          
-        <!-- Language dropdown -->
-        <li class="dropdown language-switch">
-          <a class="dropdown-toggle" data-toggle="dropdown"> 
-            <img src="images/flags/us.png" class="position-left" alt=""> English
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="deutsch"><img src="images/flags/de.png" alt=""> Deutsch </a></li>
-            <li><a class="chinese"><img src="images/flags/cn.png" alt=""> 中文 </a></li>
-            <li><a class="japanese"><img src="images/flags/jp.png" alt=""> 日本語 </a></li>
-            <li><a class="english"><img src="images/flags/us.png" alt=""> English </a></li>
-            <li><a class="espana"><img src="images/flags/es.png" alt=""> España </a></li>
-            <li><a class="russian"><img src="images/flags/ru.png" alt=""> Русский </a></li>
-          </ul>
-        </li>
-        <!-- /Language dropdown -->
       </ul>
 
 
@@ -132,23 +110,14 @@
     <div class="container col-md-12 ">
       <div ui-view="dashboardnoborder"></div>
     </div>
-    <div class="container col-md-6 ">
-      <div ui-view="about"></div>
-    </div>
-    <div class="container col-md-12 ">
-      <div ui-view="login"></div>
-    </div>
-    <div class="container col-md-6 col-md-offset-3">
-      <div ui-view="settings"></div>
-    </div>
   </div>
   
 </div> 
 <!-- ng-controller=dashboardController -->
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript" src="app/controllers/indexControllers.js"></script>
-<script type="text/javascript" src="app/directives/indexDirectives.js"></script>
+<script type="text/javascript" src="app/controllers/quindarWidgetsControllers.js"></script>
+<script type="text/javascript" src="app/directives/quindarWidgetsDirectives.js"></script>
 
 <script type="text/javascript" src="app/directives/angular-groundtrack.js"></script>
 <script type="text/javascript" src="app/factories/factory-groundtrack.js"></script>
