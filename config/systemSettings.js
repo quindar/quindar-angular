@@ -16,7 +16,7 @@ module.exports = {
   },
   'secret': 'audacy1234',
   'maxRecords': 9999,
-  'vehicles': ["IBEX", "CST-100 Starliner", "Orion MPCV", "Dream Chaser CRS-2", "ISRO OV",
+  'vehicles': ["Audacy1", "Audacy2", "Audacy3", "IBEX", "CST-100 Starliner", "Orion MPCV", "Dream Chaser CRS-2", "ISRO OV",
     "Skylon D1", "XCOR Lynx", "SIRIUS-1", "ISS (ZARYA)"],
   'exchange':'quindarExchange04',
   'exchangeType': 'topic',
