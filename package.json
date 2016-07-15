@@ -5,7 +5,22 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "install": "napa"
+  },
+  "napa": {
+    "googleOpenSans": "https://fonts.googleapis.com/css?family=Open+Sans",
+    "bootstrap-css": "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css",
+    "angular-js": "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js",
+    "angular-ui-router-js": "https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js",
+    "pace-js": "https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js",
+    "jquery-js": "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js",
+    "bootstrap-js": "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js",
+    "jquery.blockUI-js": "https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js",
+    "ui-bootstrap-tpls-js": "https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js",
+    "googleJSAPI": "https://www.google.com/jsapi",
+    "socket.io-js": "https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js",
+    "jquery-flot-js": "http://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"
   },
   "repository": {
     "type": "git",
@@ -35,6 +50,7 @@
     "mocha": "^2.4.5",
     "mongoose": "^4.4.14",
     "morgan": "^1.7.0",
+    "napa": "^2.3.0",
     "nodemon": "^1.9.2",
     "pug": "^2.0.0-alpha7",
     "randomstring": "^1.1.4",
