@@ -1,3 +1,8 @@
+// Program: angular-lineplot.js
+// Purpose: AngularJS line plot
+// Author: Masaki Kakoi
+// Updated: July 8, 2016
+// License: MIT license
 angular.module('angular-groundtrack',['d3'])
   .directive('groundtrack',['$timeout','d3',function($timeout, d3) {
 	  return {
@@ -16,8 +21,7 @@ angular.module('angular-groundtrack',['d3'])
 		  scope: {
 			audacy1: '&',
             audacy2: '&',
-            audacy3: '&'
-		          		
+            audacy3: '&'		          		
 		  },
 		  link: function(scope,element,attributes) {
 		  
@@ -113,7 +117,8 @@ angular.module('angular-groundtrack',['d3'])
 	           .attr("transform","translate(0,0)");   	
 	        };  
 			
-			var socket = io('ws://platform.audacy.space:7904');
+			var setPlatform='ws://'+platform+':'+port;
+			var socket = io(setPlatform);
       
 	        socket.on('connected', function(data) {
 	        alert("hi")
@@ -122,7 +127,7 @@ angular.module('angular-groundtrack',['d3'])
             socket.on('message', console.log.bind(console));	  
 	
 	        scope.connect = function () {
-		      alert("connect");
+		      alert(setPlatform);
 		      socket.emit('telemetry', {"type": 'position', "room": 'Audacy1'});	//Audacy1
 	          socket.emit('telemetry', {"type": 'position', "room": 'Audacy2'});    //Audacy2
 	          socket.emit('telemetry', {"type": 'position', "room": 'Audacy3'});    //Audacy3  
@@ -146,11 +151,13 @@ angular.module('angular-groundtrack',['d3'])
 	
 	            L = data_plot1.length;
 	            data_plot1.splice(0,L);
+				data_plot2.splice(0,L);
+				data_plot3.splice(0,L);
                 clearTimeout(timer);
 			};
 			
 			function updateStream() {
-			  	
+	
 		      socket.emit('telemetry', {"type": 'position', "room": 'Audacy1'});	//Audacy1
 	          socket.emit('telemetry', {"type": 'position', "room": 'Audacy2'});    //Audacy2
 	          socket.emit('telemetry', {"type": 'position', "room": 'Audacy3'});    //Audacy3  
@@ -158,99 +165,108 @@ angular.module('angular-groundtrack',['d3'])
 		      var data1=scope.audacy1;
 	          var data2=scope.audacy2;
               var data3=scope.audacy3;
-	
-              data_x1 = data1[0];
-	          data_y1 = data1[1];
-	          data_z1 = data1[2];
-
-              data_x2 = data2[0];
-	          data_y2 = data2[1];
-	          data_z2 = data2[2];
-
-              data_x3 = data3[0];
-	          data_y3 = data3[1];
-	          data_z3 = data3[2]; 
-
- 			  /** Audacy1 **/
-	          // Calculate longitude and latitude from the satellite position x, y, z.
-	          // The values (x,y,z) must be Earth fixed.
-	          r = Math.sqrt(Math.pow(data_x1,2)+Math.pow(data_y1,2)+Math.pow(data_z1,2));
-	          longitude = Math.atan2(data_y1,data_x1)/Math.PI*180;
-	          latitude = Math.asin(data_z1/r)/Math.PI*180;
-			
-		      data_plot1.push([longitude, latitude]);	
-              var L = data_plot1.length;	// length of data_plot1
-
-	          var sat_coord = projGround([data_plot1[L-1][0],data_plot1[L-1][1]]);
-              var sat_x = sat_coord[0];
-	          var sat_y = sat_coord[1];
-
-	          g.selectAll("path.route").remove();
-              g.selectAll("path.plane").remove();
-	
-	          route1 = g.append("path")
-                        .datum({type: "LineString", coordinates: data_plot1})	
-                        .attr("class", "route")
-                        .attr("d", path);
-              plane1 = g.append("path")
-                        .attr("class", "plane")
-			            .attr("transform","translate(" + sat_x + "," + sat_y + ") scale("+.2+")")
-			            .attr("d","M32.2,29.7h-1.6v-3c0-0.1-0.1-0.3-0.3-0.3H10.7c-0.1,0-0.3,0.1-0.3,0.3v7.5c0,0.1,0.1,0.3,0.3,0.3h19.6c0.1,0,0.3-0.1,0.3-0.3v-2.9h1.6V29.7z M39.8,29.7h1.6v-3c0-0.1,0.1-0.3,0.3-0.3h19.6c0.1,0,0.3,0.1,0.3,0.3v7.5c0,0.1-0.1,0.3-0.3,0.3H41.7c-0.1,0-0.3-0.1-0.3-0.3v-2.9h-1.6V29.7z M37,34.4h-2c-1.5,0-2.8-1.2-2.8-2.8V24c0-1.5,1.2-2.8,2.8-2.8h2c1.5,0,2.8,1.2,2.8,2.8v7.6C39.8,33.1,38.5,34.4,37,34.4z M36,43.2c-3.1,0-5.7-2.6-5.7-5.7h0.6c0,2.8,2.3,5.1,5.1,5.1c2.8,0,5.1-2.3,5.1-5.1h0.6C41.7,40.7,39.1,43.2,36,43.2z M36,46.9c-5.2,0-9.4-4.2-9.4-9.4h0.6c0,4.9,3.9,8.8,8.8,8.8s8.8-3.9,8.8-8.8h0.6C45.3,42.7,41.1,46.9,36,46.9z M36,50.7c-7.3,0-13.2-5.9-13.2-13.2h0.6c0,7,5.7,12.6,12.6,12.6s12.6-5.7,12.6-12.6h0.6C49.2,44.8,43.3,50.7,36,50.7z");
-			
-			  /** Audacy2 **/
-	          // Calculate longitude and latitude from the satellite position x, y, z.
-	          // The values (x,y,z) must be Earth fixed.
-	          r = Math.sqrt(Math.pow(data_x2,2)+Math.pow(data_y2,2)+Math.pow(data_z2,2));
-	          longitude = Math.atan2(data_y2,data_x2)/Math.PI*180;
-	          latitude = Math.asin(data_z2/r)/Math.PI*180;
-	
-	          data_plot2.push([longitude, latitude]);	
-              L = data_plot2.length;	// length of data_plot2
-
-	          var sat_coord = projGround([data_plot2[L-1][0],data_plot2[L-1][1]]);
-              var sat_x = sat_coord[0];
-	          var sat_y = sat_coord[1];
-
-              route2 = g.append("path")
-                        .datum({type: "LineString", coordinates: data_plot2})	
-                        .attr("class", "route")
-                        .attr("d", path);
-              plane2 = g.append("path")
-                        .attr("class", "plane")
-			            .attr("transform","translate(" + sat_x + "," + sat_y + ") scale("+.2+")")
-			            .attr("d","M32.2,29.7h-1.6v-3c0-0.1-0.1-0.3-0.3-0.3H10.7c-0.1,0-0.3,0.1-0.3,0.3v7.5c0,0.1,0.1,0.3,0.3,0.3h19.6c0.1,0,0.3-0.1,0.3-0.3v-2.9h1.6V29.7z M39.8,29.7h1.6v-3c0-0.1,0.1-0.3,0.3-0.3h19.6c0.1,0,0.3,0.1,0.3,0.3v7.5c0,0.1-0.1,0.3-0.3,0.3H41.7c-0.1,0-0.3-0.1-0.3-0.3v-2.9h-1.6V29.7z M37,34.4h-2c-1.5,0-2.8-1.2-2.8-2.8V24c0-1.5,1.2-2.8,2.8-2.8h2c1.5,0,2.8,1.2,2.8,2.8v7.6C39.8,33.1,38.5,34.4,37,34.4z M36,43.2c-3.1,0-5.7-2.6-5.7-5.7h0.6c0,2.8,2.3,5.1,5.1,5.1c2.8,0,5.1-2.3,5.1-5.1h0.6C41.7,40.7,39.1,43.2,36,43.2z M36,46.9c-5.2,0-9.4-4.2-9.4-9.4h0.6c0,4.9,3.9,8.8,8.8,8.8s8.8-3.9,8.8-8.8h0.6C45.3,42.7,41.1,46.9,36,46.9z M36,50.7c-7.3,0-13.2-5.9-13.2-13.2h0.6c0,7,5.7,12.6,12.6,12.6s12.6-5.7,12.6-12.6h0.6C49.2,44.8,43.3,50.7,36,50.7z");
-			
-			  /** Audacy3 **/
-	          // Calculate longitude and latitude from the satellite position x, y, z.
-	          // The values (x,y,z) must be Earth fixed.
-	          r = Math.sqrt(Math.pow(data_x3,2)+Math.pow(data_y3,2)+Math.pow(data_z3,2));
-	          longitude = Math.atan2(data_y3,data_x3)/Math.PI*180;
-	          latitude = Math.asin(data_z3/r)/Math.PI*180;
-	
-	          data_plot3.push([longitude, latitude]);	
-              L = data_plot3.length;	// length of data_plot3
-
-	          var sat_coord = projGround([data_plot3[L-1][0],data_plot3[L-1][1]]);
-              var sat_x = sat_coord[0];
-	          var sat_y = sat_coord[1];
-	
-	          route3 = g.append("path")
-                        .datum({type: "LineString", coordinates: data_plot3})	
-                        .attr("class", "route")
-                        .attr("d", path);
-              plane3 = g.append("path")
-                        .attr("class", "plane")
-			            .attr("transform","translate(" + sat_x + "," + sat_y + ") scale("+.2+")")
-			            .attr("d","M32.2,29.7h-1.6v-3c0-0.1-0.1-0.3-0.3-0.3H10.7c-0.1,0-0.3,0.1-0.3,0.3v7.5c0,0.1,0.1,0.3,0.3,0.3h19.6c0.1,0,0.3-0.1,0.3-0.3v-2.9h1.6V29.7z M39.8,29.7h1.6v-3c0-0.1,0.1-0.3,0.3-0.3h19.6c0.1,0,0.3,0.1,0.3,0.3v7.5c0,0.1-0.1,0.3-0.3,0.3H41.7c-0.1,0-0.3-0.1-0.3-0.3v-2.9h-1.6V29.7z M37,34.4h-2c-1.5,0-2.8-1.2-2.8-2.8V24c0-1.5,1.2-2.8,2.8-2.8h2c1.5,0,2.8,1.2,2.8,2.8v7.6C39.8,33.1,38.5,34.4,37,34.4z M36,43.2c-3.1,0-5.7-2.6-5.7-5.7h0.6c0,2.8,2.3,5.1,5.1,5.1c2.8,0,5.1-2.3,5.1-5.1h0.6C41.7,40.7,39.1,43.2,36,43.2z M36,46.9c-5.2,0-9.4-4.2-9.4-9.4h0.6c0,4.9,3.9,8.8,8.8,8.8s8.8-3.9,8.8-8.8h0.6C45.3,42.7,41.1,46.9,36,46.9z M36,50.7c-7.3,0-13.2-5.9-13.2-13.2h0.6c0,7,5.7,12.6,12.6,12.6s12.6-5.7,12.6-12.6h0.6C49.2,44.8,43.3,50.7,36,50.7z");
-					  
-			  if (L > L_pts) {
-    	        data_plot1.splice(L_pts-1,1); // Erase data 
-				data_plot2.splice(L_pts-1,1); // Erase data 
-				data_plot3.splice(L_pts-1,1); // Erase data 
-			  }
+	          if (data1[0]==null || data2[0]==null || data3[0]==null) {
+				  alert("No Data Available!");
+				  clearTimeout(timer);
+			  }else{
 			  
-			  timer = setTimeout(updateStream, delay);
-		    }
+                data_x1 = data1[0];
+	            data_y1 = data1[1];
+	            data_z1 = data1[2];
+
+                data_x2 = data2[0];
+	            data_y2 = data2[1];
+	            data_z2 = data2[2];
+
+                data_x3 = data3[0];
+	            data_y3 = data3[1];
+	            data_z3 = data3[2]; 
+
+ 			    /** Audacy1 **/
+	            // Calculate longitude and latitude from the satellite position x, y, z.
+	            // The values (x,y,z) must be Earth fixed.
+	            r = Math.sqrt(Math.pow(data_x1,2)+Math.pow(data_y1,2)+Math.pow(data_z1,2));
+	            longitude = Math.atan2(data_y1,data_x1)/Math.PI*180;
+	            latitude = Math.asin(data_z1/r)/Math.PI*180;
+			
+		        data_plot1.push([longitude, latitude]);	
+                L = data_plot1.length;	// length of data_plot1
+
+	            var sat_coord = projGround([data_plot1[L-1][0],data_plot1[L-1][1]]);
+                var sat_x = sat_coord[0];
+	            var sat_y = sat_coord[1];
+
+	            g.selectAll("path.route").remove();
+                g.selectAll("path.plane").remove();
+	
+	            route1 = g.append("path")
+                          .datum({type: "LineString", coordinates: data_plot1})	
+                          .attr("class", "route")
+                          .attr("d", path);
+
+                plane1 = g.append("path")
+                          .attr("class", "plane")
+			              .attr("transform","translate(" + sat_x + "," + sat_y + ") scale("+.2+")")
+			              .attr("d","M32.2,29.7h-1.6v-3c0-0.1-0.1-0.3-0.3-0.3H10.7c-0.1,0-0.3,0.1-0.3,0.3v7.5c0,0.1,0.1,0.3,0.3,0.3h19.6c0.1,0,0.3-0.1,0.3-0.3v-2.9h1.6V29.7z M39.8,29.7h1.6v-3c0-0.1,0.1-0.3,0.3-0.3h19.6c0.1,0,0.3,0.1,0.3,0.3v7.5c0,0.1-0.1,0.3-0.3,0.3H41.7c-0.1,0-0.3-0.1-0.3-0.3v-2.9h-1.6V29.7z M37,34.4h-2c-1.5,0-2.8-1.2-2.8-2.8V24c0-1.5,1.2-2.8,2.8-2.8h2c1.5,0,2.8,1.2,2.8,2.8v7.6C39.8,33.1,38.5,34.4,37,34.4z M36,43.2c-3.1,0-5.7-2.6-5.7-5.7h0.6c0,2.8,2.3,5.1,5.1,5.1c2.8,0,5.1-2.3,5.1-5.1h0.6C41.7,40.7,39.1,43.2,36,43.2z M36,46.9c-5.2,0-9.4-4.2-9.4-9.4h0.6c0,4.9,3.9,8.8,8.8,8.8s8.8-3.9,8.8-8.8h0.6C45.3,42.7,41.1,46.9,36,46.9z M36,50.7c-7.3,0-13.2-5.9-13.2-13.2h0.6c0,7,5.7,12.6,12.6,12.6s12.6-5.7,12.6-12.6h0.6C49.2,44.8,43.3,50.7,36,50.7z");
+			            
+			    /** Audacy2 **/
+	            // Calculate longitude and latitude from the satellite position x, y, z.
+	            // The values (x,y,z) must be Earth fixed.
+	            r = Math.sqrt(Math.pow(data_x2,2)+Math.pow(data_y2,2)+Math.pow(data_z2,2));
+	            longitude = Math.atan2(data_y2,data_x2)/Math.PI*180;
+	            latitude = Math.asin(data_z2/r)/Math.PI*180;
+	
+	            data_plot2.push([longitude, latitude]);	
+                L = data_plot2.length;	// length of data_plot2
+
+	            var sat_coord = projGround([data_plot2[L-1][0],data_plot2[L-1][1]]);
+                var sat_x = sat_coord[0];
+	            var sat_y = sat_coord[1];
+
+                route2 = g.append("path")
+                          .datum({type: "LineString", coordinates: data_plot2})	
+                          .attr("class", "route")
+                          .attr("d", path);
+
+                plane2 = g.append("path")
+                          .attr("class", "plane")
+			              .attr("transform","translate(" + sat_x + "," + sat_y + ") scale("+.2+")")
+			              .attr("d","M32.2,29.7h-1.6v-3c0-0.1-0.1-0.3-0.3-0.3H10.7c-0.1,0-0.3,0.1-0.3,0.3v7.5c0,0.1,0.1,0.3,0.3,0.3h19.6c0.1,0,0.3-0.1,0.3-0.3v-2.9h1.6V29.7z M39.8,29.7h1.6v-3c0-0.1,0.1-0.3,0.3-0.3h19.6c0.1,0,0.3,0.1,0.3,0.3v7.5c0,0.1-0.1,0.3-0.3,0.3H41.7c-0.1,0-0.3-0.1-0.3-0.3v-2.9h-1.6V29.7z M37,34.4h-2c-1.5,0-2.8-1.2-2.8-2.8V24c0-1.5,1.2-2.8,2.8-2.8h2c1.5,0,2.8,1.2,2.8,2.8v7.6C39.8,33.1,38.5,34.4,37,34.4z M36,43.2c-3.1,0-5.7-2.6-5.7-5.7h0.6c0,2.8,2.3,5.1,5.1,5.1c2.8,0,5.1-2.3,5.1-5.1h0.6C41.7,40.7,39.1,43.2,36,43.2z M36,46.9c-5.2,0-9.4-4.2-9.4-9.4h0.6c0,4.9,3.9,8.8,8.8,8.8s8.8-3.9,8.8-8.8h0.6C45.3,42.7,41.1,46.9,36,46.9z M36,50.7c-7.3,0-13.2-5.9-13.2-13.2h0.6c0,7,5.7,12.6,12.6,12.6s12.6-5.7,12.6-12.6h0.6C49.2,44.8,43.3,50.7,36,50.7z");
+
+			
+			    /** Audacy3 **/
+	            // Calculate longitude and latitude from the satellite position x, y, z.
+	            // The values (x,y,z) must be Earth fixed.
+	            r = Math.sqrt(Math.pow(data_x3,2)+Math.pow(data_y3,2)+Math.pow(data_z3,2));
+	            longitude = Math.atan2(data_y3,data_x3)/Math.PI*180;
+	            latitude = Math.asin(data_z3/r)/Math.PI*180;
+	
+	            data_plot3.push([longitude, latitude]);	
+                L = data_plot3.length;	// length of data_plot3
+
+	            var sat_coord = projGround([data_plot3[L-1][0],data_plot3[L-1][1]]);
+                var sat_x = sat_coord[0];
+	            var sat_y = sat_coord[1];
+	
+	            route3 = g.append("path")
+                          .datum({type: "LineString", coordinates: data_plot3})	
+                          .attr("class", "route")
+                          .attr("d", path);
+
+                plane3 = g.append("path")
+                          .attr("class", "plane")
+			              .attr("transform","translate(" + sat_x + "," + sat_y + ") scale("+.2+")")
+			              .attr("d","M32.2,29.7h-1.6v-3c0-0.1-0.1-0.3-0.3-0.3H10.7c-0.1,0-0.3,0.1-0.3,0.3v7.5c0,0.1,0.1,0.3,0.3,0.3h19.6c0.1,0,0.3-0.1,0.3-0.3v-2.9h1.6V29.7z M39.8,29.7h1.6v-3c0-0.1,0.1-0.3,0.3-0.3h19.6c0.1,0,0.3,0.1,0.3,0.3v7.5c0,0.1-0.1,0.3-0.3,0.3H41.7c-0.1,0-0.3-0.1-0.3-0.3v-2.9h-1.6V29.7z M37,34.4h-2c-1.5,0-2.8-1.2-2.8-2.8V24c0-1.5,1.2-2.8,2.8-2.8h2c1.5,0,2.8,1.2,2.8,2.8v7.6C39.8,33.1,38.5,34.4,37,34.4z M36,43.2c-3.1,0-5.7-2.6-5.7-5.7h0.6c0,2.8,2.3,5.1,5.1,5.1c2.8,0,5.1-2.3,5.1-5.1h0.6C41.7,40.7,39.1,43.2,36,43.2z M36,46.9c-5.2,0-9.4-4.2-9.4-9.4h0.6c0,4.9,3.9,8.8,8.8,8.8s8.8-3.9,8.8-8.8h0.6C45.3,42.7,41.1,46.9,36,46.9z M36,50.7c-7.3,0-13.2-5.9-13.2-13.2h0.6c0,7,5.7,12.6,12.6,12.6s12.6-5.7,12.6-12.6h0.6C49.2,44.8,43.3,50.7,36,50.7z");
+					  
+			    if (L > L_pts) {
+    	          data_plot1.splice(L_pts-1,1); // Erase data 
+				  data_plot2.splice(L_pts-1,1); // Erase data 
+				  data_plot3.splice(L_pts-1,1); // Erase data 
+			    }
+			  
+			    timer = setTimeout(updateStream, delay);
+			  };
+		    };
 
             /** position **/
             socket.on('position', function(telemetryData) {
@@ -322,9 +338,7 @@ angular.module('angular-groundtrack',['d3'])
 
         function projGround(d){
 			return projection(d);
-        }
-  
-	  }
-	  
+        }  
+	  }	  
   };
 }]);
