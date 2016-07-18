@@ -1,18 +1,20 @@
 # Overview
-The rapidly falling cost of launching a satellite has resulted in near exponential growth in the number of spacecraft being deployed and operated. Most often, each spacecraft owner / operator conducts Mission Operations using specialized software developed in house. Mission Operations centers can range in size from something as modest as a single laptop connected to a backyard radio antenna, to multiple rooms housing dozens of consoles each equipped with as many as 10 displays and/or combined with very large projection systems at the front of the room. Due to its specialized nature, the software powering these displays is often developed in house by the user, and frequently does not have the benefits of a modern software design architecture, mainstream libraries, and graphical capabilities. 
+Updated: Jul 18, 2016 by Ray Lai
+
+The rapidly falling cost of launching a satellite has resulted in near exponential growth in the number of spacecraft being deployed and operated. Most often, each spacecraft owner/operator conducts Mission Operations using specialized software developed in house. Mission Operations centers can range in size from something as modest as a single laptop connected to a backyard radio antenna, to multiple rooms housing dozens of consoles each equipped with as many as 10 displays and/or combined with very large projection systems at the front of the room. Due to its specialized nature, the software powering these displays is often developed in house by the user, and frequently does not have the benefits of a modern software design architecture, mainstream libraries, and graphical capabilities. 
 
 This project aims to create a modern, browser based, real time data visualization platform to monitor and operate complex engineering systems in a spaceflight mission operations setting. While other FOSS (Free Open Source Software) projects of this nature exist, this particular project is commercially backed by Audacy (http://audacy.space), who is fully committed to maintain it as free (no cost, open source) to the growing worldwide community of spacecraft operators of all sizes, now and in perpetuity.
 
 For those unfamiliar with space mission operations, or just getting started, here is a list of comparable projects which offer some useful context:
 
 * ESA European Ground Systems - Common Core: http://www.egscc.esa.int 
-* NASA OpenMCT: https://sites.google.com/site/openmct/
+* NASA OpenMCT: http://nasa.github.io/openmct/
 * HSFL Cosmos: http://cosmos-project.org/
 * G-Predict: http://gpredict.oz9aec.net/
 * SatNOGS: https://satnogs.org/
 
 # Project Goal
-The resulting mission operations software will aim achieve a modular front-end (allowing users to develop application specific widgets), and an REST API based backend (allowing users to drive displays from their specific data source). The user interface will be browser based, using the MEAN technology stack, incorporating rapid maintenance and upgradability while operating in a mission critical environment. 
+The resulting mission operations software aims to achieve a modular front-end (allowing users to develop application specific widgets), and an REST API based backend (allowing users to drive displays from their specific data source). The user interface will be browser based, using the MEAN technology stack, incorporating rapid maintenance and upgradability while operating in a mission critical environment. 
 
 The technology stack includes:  JavaScript, SVG (Vector graph for 3D visualization), REST API (for backend integration and data sources).
 
@@ -22,7 +24,7 @@ The technology stack includes:  JavaScript, SVG (Vector graph for 3D visualizati
 
 # Features
 The data visualization framework (aka widgets) will be able to provide the following functionality:
-* Ability to pause live feed and capture a snapshot for export
+* Ability to stream and pause live feed and capture a snapshot for export
 * Hyperlinks for "drill down"
 * Ability to zoom in/out
 * Ability to save screen position & widget options
@@ -36,40 +38,174 @@ The widgets are grouped into the following categories:
 * Input Modules
 
 # How to Install Quindar
-* Download quindar-angular
-* Run buildme.sh
-* run server.js: node server.js
-* Open Quindar: localhost:####/index.html
+## Pre-requisites
+* You need to install NodeJS on your target host (e.g. laptop, Linux host) first.
+Using NodeJS's Node Package Manager, you can install this ground track widget. 
+
+You can refer to the installation instructions under https://nodejs.org/en/download or https://nodejs.org/en/download/package-manager.
+
+* You need "git" binaries installed on your target host. 
+  - Git is pre-installed on MacOS.
+  - On Linux host, you can install Git by "sudo yum install git" (for CentOS, Redhat, Fedora), or "sudo apt-get install git" (for Ubuntu).
+
+* You need to create a local copy of this project. For example,
+```
+git clone https://github.com/audacyDevOps/quindar-angular.git
+``` 
+
+## Dependencies
+* AngularJS
+* NodeJS
+* quindar-platform
+* quindar-gmat
+
+Once you download the quindar-angular project, you need to run buildme.sh in the example folder to install required module. Refer to the "How to Run the Demo" section for details. 	
+	
+## How to Run the Demo
+* After creating a local copy of this project, run the script "buildme.sh" to install NodeJS dependencies and libraries:
+
+```
+cd quindar-angular
+./buildme.sh
+```
+
+If you use Windows machine, you can run the following commands as an alternative:
+```
+cd quindar-angular
+npm install
+mkdir log
+```
+
+* Go to the example folder and run server.js to start the HTTP Web server: 
+```
+node server.js
+```
+
+You can also use:
+```
+nodemon server.js
+```
+
+The utility "nodemon" is similar to "node" (HTTP Web server), and it will automatically reload the Web pages whenever any Web page is updated.
+
+* Open a Web browser with the URL http://localhost:3000. You should see a Web page with widgets (e.g. line charts).
 
 # How to Use Widgets
-The widgets will be available in at least 2 ways:
+The widgets will be available in:
 * AngularJS directives
 AngularJS directives are similar to HTML buttons that developers find in many Web pages. They can add these directives in your Web pages, similar to adding buttons or "div" tags. Each directive denotes a widget function, with associated backend data sources you can configure or customize).
+* Mission operations application
+Quindar-angular project is a mission operations application that uses a variety of widgets. You can add or customize your own widgets too using the widget framework from quindar-angular project.
 
-# How to Create a New Widget
-1. Create a directive file and other necessary files in appropriate folders.
-1. Modify the Quindar index.html to add necessary source links.
-1. Make sure there are no dependencies in the controller file, i.e., no [] in the module definition line, 
-  1. e.g., var app = angular.module('app')
-1. Add 'app' as a dependency to the directive file.
-1. Make sure no scopes are defined in the directive file.
-1. Make sure if the controller is linked by adding a line, controller: 'controller_name', to the directive.
-2. Modify widgetDefinitions and $scope.dashboard so that the new widget is available. 
+## How to Integrate with Quindar 
+Quindar is a real-time mission operations application produced by Audacy. You can add your new AngularJS directive to grid-like window in Quindar as per the following steps:
+	
+* Create a copy of Quindar-angular on your target host 
+  - e.g. git clone https://github.com/audacyDevOps/quindar-angular.git)
+* Create a copy of your new AngularJS directive on your target host under a separate folder.
+* Copy your new directive JavaScript file to quindar-angular project.
 
-* JavaScript functions
-If developers want to modify or extend these directives, they may want to consider native JavaScript functions for these widget functionalities. The choice of JavaScript functions is targeted for short learning curve and the popularity of JavaScript across different software platforms (e.g. MEAN stack).
+For example, you have a new directive called quindar-groundtrack.
+  - From quindar-groundtrack project folder "/dist" (https://github.com/audacyDevOps/quindar-groundtrack/tree/master/dist) 
+  - To the quindar-angular project folder "/app/directives".
+* Copy your new directive factory JavaScript file to quindar-angular project.
+
+For example, you have a new directive called quindar-groundtrack with a factory file factory-groundtrack.js:
+  - From quindar-groundtrack project folder "/example/app/factories" (https://github.com/audacyDevOps/quindar-groundtrack/tree/master/example/app/factories)
+  - To quindar-angular project folder "/app/factories"
+* Edit the quindarWidgetsControllers.js (controller) to add the new widget:
+  - Add your widget definition in the $scope.widgetDefinitions:
+```
+   var widgetDefinitions = [
+      {
+        name: 'Line Plot',
+        directive: 'lineplot',
+        style: {
+          width: '33%'
+        }
+      },
+      {
+        name: 'Ground Track',
+        directive: 'groundtrack',
+        style: {
+          width: '100%'
+        }
+      }
+    ];
+```
+
+  - Add your new widget in a page definition (e.g. page 4 with id=3) in the $scope.dashboards array, e.g.
+```
+$scope.dashboards = [
+      {
+        id: 0,
+        name: 'Basic',
+        widgets: [{
+          col: 0,
+          row: 0,
+          sizeY: 3,
+          sizeX: 4,
+          name: "Page 1 - Line Plot",
+          directive: "lineplot"
+        }]
+      },
+      ...
+      {
+        id: 3,
+        name: 'Ground Operations',
+        widgets: [{
+          col: 0,
+          row: 0,
+          sizeY: 3,
+          sizeX: 4,
+          name: "Page 4 - Ground Track",
+          directive: "groundtrack"
+        }]
+      },
+      {
+        id: 4,
+        name: 'Custom',
+        widgets: []
+      }
+    ];
+```
+
+From the above example, it will enable Quindar widget to render groundtrack widget on page 4, by specifying the directive name "groundtrack". 
+
+* Add the controller quindarWidgetsControllers.js to include your new directive. Here is an example of the changes:
+  - var app = angular.module('app')
+  - Add your new directive (e.g. angular-groundtrack) as a dependency to the angular.module.
+
+* Update the JavaScript and CSS stylesheet in the file index.html
+  - Your new AngularJS directive probably requires new JS/CSS files. You may want to review the current index.html
+to see if the versions are compatible.
+
+For example:
+  - quindar-groundtrack requires D3 and angular-d3 third party JS/CSS. They are consolidated and concatenated in the files "groundtrack-thirdparty.js" and "groundtrack-thirdparty.css" for convenience. Refer to https://github.com/audacyDevOps/quindar-groundtrack/tree/master/example/dist for details.
+  - You can refer to the /example/index.html as an example.
+  - e.g. for quindar-groundtrack project, you will need to add the following files:
+```
+  <script src="dist/angular-groundtrack.js"></script>
+  <script src="app/controllers/app-groundtrack.js"></script>
+  <script src="app/factories/factory-groundtrack.js"></script>
+  <script src="config/clientSettings.js"></script>
+```
+
+* You can manually re-test your new quindar-angular mission operations application to verify if the application works as expected.
+  - There will be some automated widget test scripts in the quindar-angular project.
+  - You can run "nodemon server.js" and open a Web browser with the URL http://localhost:3000 to test the changes.
 
 You will find detailed technical documentation (e.g. user guide) and examples in the subfolders.
 
 # Folder Structure
-* Widget application is an AngularJS application
-  - /app/controllers:  AngularJS controller for the widget application
+* Widget is an AngularJS application
+  - /app/controllers:  AngularJS controllers for the widgets
   - /app/directives: Quindar widget directives used for charts and graphs 
   - /app/factories: wrapper for REST API or backend services
   - /app/models: data schema for telemetry
-  - /app/styles: CSS stylesheets for the widget application
-  - /app/views: UI views used in the widget application
-  - /dist: consolidated JS/CSS used for widget application Web pages
+  - /app/styles: CSS stylesheets for the widgets 
+  - /app/views: UI views used in the widgets
+  - /dist: consolidated JS/CSS used Web pages
 
 * Configuration file under /config
    - system settings (e.g. server end-points) and credentials (e.g. username, password)
@@ -105,7 +241,7 @@ If you run on Windows, you can run:
 npm install
 ```
 
-* To run your local instance of widget application, 
+* To run your local instance of Quindar widgets, 
 ```
 node server.js
 ```
@@ -163,9 +299,9 @@ Backend testing is handled by running the shell script **backendLoadTest.sh**.
   ```
 
 ## Frontend Testing
-Testing of the frontend uses a shell script to automatically test the web page with multiple users.
+Frontend testing uses a shell script to automatically test the web page with multiple users.
 
-Frontend Testing is run using **frontendLoadTest.sh**.
+Frontend testing is run using **frontendLoadTest.sh**.
 * This script runs through a default of 50 users across three tabs on the webpage.
 * The tested tabs include:
   - Dashboard
@@ -194,10 +330,12 @@ The *time* command is used in each shell script to output information about the 
 For more information about the *time* command, check out this stackoverflow post:
 [What do 'real', 'user' and 'sys' mean in the output of time?](http://stackoverflow.com/questions/556405/what-do-real-user-and-sys-mean-in-the-output-of-time1/556411#556411)
 
+# Known Constraints
+* No known constraints so far.
 
-# For More Information
+# Additional Information
 * For license (terms of use), please refer to the file license.md.
-* If you want to contribute, or to extend the framework, you may want to refer to the "How to Contribute" document (contributing.md).
+* To contribute, or to extend the framework, you may want to refer to the "How to Contribute" document (contributing.md).
 * For developers who want to modify or extend the framework, they may start with development guidelines (e.g. coding style, testing checklist) document in the contributing.md, and also additional checklists under the /docs folder. 
 * The document features.md outlines the technical features and a list of widgets.
 * The document frameworkDesign.md provides a high level summary of the software architecture.
