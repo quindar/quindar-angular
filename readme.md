@@ -93,7 +93,7 @@ You will find detailed technical documentation (e.g. user guide) and examples in
 curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
 sudo yum -y install nodejs
 ```
-
+ 
 * Git clone the platform project from Github, e.g. git clone https://github.com/audacyDevOps/quindar-angular
 * Install NodeJS depencencies
 ```
