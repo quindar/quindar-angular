@@ -64,14 +64,14 @@
 
 </head>
 
-<body ng-app="app" style="background-color:#8B8C94">
+<body ng-app="app" style="background-color:#020613">
 <div ng-controller="dashboardController">
 
   <div class="navbar navbar-inverse header-highlight" >
     <!-- Navbar header -->
-    <div class="navbar-header header-transition-hover">
+    <div class="navbar-header header-transition-hover" style="background-color:#020613; border-bottom: 2px solid #07D1EA">
       <a class="navbar-brand" href="index.html">
-        <img src="images/Audacy_Logo_White_128x32.png" alt="">
+        <img src="images/Quindar_Logo_White.png" alt="" style="height:30px">
       </a>
       <ul class="nav navbar-nav visible-xs-block">
         <li>
@@ -85,7 +85,7 @@
     <!-- /Navbar header -->
 
     <!-- Navbar menus -->
-    <div class="navbar-collapse collapse" id="navbar-mobile">
+    <div class="navbar-collapse collapse" id="navbar-mobile" style="background-color:#020613 ; border-bottom: 2px solid #07D1EA">
       
       <!-- /Navbar icons -->
       <ul class="nav navbar-nav navbar-right">
@@ -119,7 +119,7 @@
     <div class="container col-md-10 ">
       <div ui-view="body"></div>
     </div>
-    <div class="container col-md-10 " style="background-color:#8B8C94">
+    <div class="container col-md-10 " style="background-color:#020613">
       <div ui-view="dashboard"></div>
     </div>
     <div class="container col-md-12 ">

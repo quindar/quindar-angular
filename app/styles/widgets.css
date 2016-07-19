@@ -23,21 +23,21 @@
 .lineplotbutton {
   font-family: "Open Sans", Sans-serif;
   padding: 5px 10px;
-  background-color: #8B8C94;  
-  color: #B8F6FC;
+  background-color: #07D1EA;  
+  color: #F1F1F5;
   font-size: 12px;
 }
 
 .listlabel {
   font-family: "Open Sans", Sans-serif;
   padding: 5px 5px;  
-  color: #B8F6FC;
-  background-color: #464954;
+  color: #F1F1F5;
+  background-color: #242833;
   font-size: 14px;
 }
 
 .buttonOn{
-  background-color: #464954;
+  background-color: #1072A4;
 }
 /****************/
 
@@ -67,8 +67,8 @@
 .groundbutton {
   font-family: "Open Sans", Sans-serif;	
   padding: 5px 10px;
-  background-color: #CFCFD5;  
-  color: #020613;
+  background-color: #07D1EA;  
+  color: #F1F1F5;
   font-size: 10px;
 }
 

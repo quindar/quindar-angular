@@ -221,8 +221,8 @@
 .navigation > li.active > a,
 .navigation > li.active > a:hover,
 .navigation > li.active > a:focus {
-  background-color: #455A64;
-  color: #fff;
+  background-color: #153C7C;
+  color: #F1F1F5;
 }
 .navigation > li.active > a > [class*=text-] {
   color: #fff;
@@ -283,6 +283,7 @@
 .navigation .navigation-header > span {
   display: block;
   margin-top: 2px;
+  color: #0D8DB8;
 }
 .navigation .navigation-header > i {
   display: none;
