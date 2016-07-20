@@ -46,3 +46,5 @@ jspm_packages
 node_modules/
 tmp/
 .DS_Store
+.idea
+.idea/
