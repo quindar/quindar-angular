@@ -16,7 +16,7 @@ For those unfamiliar with space mission operations, or just getting started, her
 # Project Goal
 The resulting mission operations software aims to achieve a modular front-end (allowing users to develop application specific widgets), and an REST API based backend (allowing users to drive displays from their specific data source). The user interface will be browser based, using the MEAN technology stack, incorporating rapid maintenance and upgradability while operating in a mission critical environment. 
 
-The technology stack includes:  JavaScript, SVG (Vector graph for 3D visualization), REST API (for backend integration and data sources).
+The technology stack includes:  JavaScript, SVG (Vector graphics for 3D visualization), REST API (for backend integration and data sources).
 
 # Benefits
 * Ease of deployment and support - the framework has zero footprint, and light-weight stack. Thus, the browser does not require installing or upgrading software plugin for new software changes.
@@ -47,6 +47,7 @@ You can refer to the installation instructions under https://nodejs.org/en/downl
 * You need "git" binaries installed on your target host. 
   - Git is pre-installed on MacOS.
   - On Linux host, you can install Git by "sudo yum install git" (for CentOS, Redhat, Fedora), or "sudo apt-get install git" (for Ubuntu).
+  - On Windows, you can download and install Git from here: https://git-scm.com/downloads
 
 * You need to create a local copy of this project. For example,
 ```

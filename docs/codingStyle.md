@@ -1,5 +1,5 @@
 # Quindar Project Standard and Coding Style Guide
-Updated: Jul 15, 2016 by Ray Lai
+Updated: Jul 19, 2016 by Ray Lai
 
 This is a proposed project standard how to structure the folders, naming convention and some coding style best practices with examples.
 
@@ -269,13 +269,47 @@ https://www.joyent.com/blog/best-practices-for-error-handling-in-node-js
 ## Appendix: Quindar JavaScript Cookbook Recipes
 This is a collection of design patterns and cookbook recipes used in Quindar projects for consistency. 
 
-### System Settings and Config
-* Do not hard-code port number in the main codes; use variable to define process environment variable, e.g.
+### System Settings 
+* Do not hard-code port number in the main codes; use variable to define process environment variable.
+
+In your NodeJS startup file (server.js) or any JavaScript file, you can use Linux environment variable to specify a particular port number (process.env.SECUREPORT is a Linux variable), instead of defining "var securePort = 3001), e.g.
+
 ```
 var securePort = process.env.SECUREPORT || 3001;
 ```
 
-* Load different NodeJS files by modules and use dependency injection (pass variables to modules), e.g.
+The benefit is that this construct allows DevOps administrators to change the port at deploy time without binding to a pre-defined port 3001.  It is one of good DevOps security practices.
+
+* do not hard code username and password in main source codes. use config file.
+In this example, we create a config file under /config subfolder. You can reference the server end-points, username and password by using the prefix systemSettings.
+
+```
+var systemSettings = require('./config/systemSettings.js');
+...
+mongoose.connect(systemSettings.dbUrl, systemSettings.dbOptions); 
+```
+
+For example, in coreAdmin.js, it loads the file systemSettings.js. You can connect to MongoDB database via the middleware mongoose by passing the database URL (systemSettings.dbUrl) and the database username/password (systemSettings.dbOptions).
+
+In the config file systemSettings.js, the database URL and username/passwords are defined as:
+```
+ 'dbUrl': 'mongodb://data01.audacy.space:11001/telemetry',
+  'dbOptions': {
+    'user': 'xxx',
+    'pass': 'yyy',
+    'auth': {
+      'authdb': 'admin'
+   },
+```
+
+The benefit is that you will not find any hard-coded server endpoints, URL or username/password in the source codes. If you need to change the service endpoints or password, you can change the password. This is more manageable and secure.
+### Writing Modular Codes
+* Load different NodeJS files by modules and use dependency injection (pass variables to modules).
+
+In your NodeJS startup file (server.js) or any JavaScript file), you can build separate JavaScript files (e.g. by categories), and load them when needed.  If you put all the backend process logic into one single JavaScript file, the file will be too large to read and debug. If you write in modules, you can load certain modules based on specific condition. In quindar-platform project, the common data services APIs are defined in a module called coreAdmin.js, the messaging APIs are defined in messageQueue.js.
+
+Here is an example in server.js from the quindar-platform project, where you load different modules. In this example, each module will re-use different variables (or dependencies).
+
 ```
 require('./app/scripts/verifyMe.js')(app);
 require('./app/scripts/telemetryRead.js')(app, mongoose, syslogger, logger);
@@ -285,7 +319,11 @@ require('./app/scripts/webSocket.js')(app, socketPort, syslogger, logger, helper
 require('./app/scripts/webSocketSSL.js')(app, secureSocketServer, secureSocketPort, io, syslogger, logger, helper);
 ```
 
-* Use logging plugins such as winston and morgan to allow log file rotation, e.g.
+### Logging
+* Use logging plugins such as winston and morgan to allow log file rotation.
+
+NodeJS does not provide native logging. This example will leverage NPM modules winston and morgan, such that any console.log messages will be appended in a log file with the suffix "access-YYYYMMDD.log" under the subfolder /log.  The file will be rotated such that when the file is growing too large, it will automatically rotated by removing the older records.
+
 ```
 var logDirectory = __dirname + '/log'
 var accessLogStream = FileStreamRotator.getStream({
@@ -297,12 +335,9 @@ var accessLogStream = FileStreamRotator.getStream({
 app.use(syslogger('combined', {stream: accessLogStream}))
 ```
 
-* do not hard code username and password in main source codes. use config file, e.g.
-```
-var systemSettings = require('./config/systemSettings.js');
-```
+* Input data validation on client-side and also on backend. Use "flash" for error notification.
+One best practice is to validate the data format in both client-side (data input form, or HTML form), in the backend REST API.  On the client side, we also need to return or display the error on the screen.  connect-flash is an NPM package that helps storing the error messages into a flash message (which will appear for a few seconds and dismiss automatically).
 
-* Input data validation on client-side and also on backend. Use "flash" for error notification, e.g.
 ```
 var flash = require('connect-flash');
 ...
@@ -313,7 +348,13 @@ app.use(flash());
 * Optimize your client-side JS/CSS packages in build process. Verify your client side web page performance using tools like PageSpeed, or chrome plugin such as https://gtmetrix.com/
 
 ## Page Navigation 
-* Use ui-router for page navigation, e.g.
+* Use ui-router for page navigation.
+ui-router is an NPM package that allows developers to define which UI view (e.g. Web page) will be displayed when certain mouse click actions occur. It could be stored in separate JavaScript file (e.g. ui-router.js), or embedded in your HTML Web page under "script" tag, or even in your JavaScript files.
+
+For example, in quindar-platform project, you can define 4 UI views (Web pages) users can navigate: (1) data generator Web page, (2) data metrics Web page, (3) data browser Web page, (4) data clean up Web page.  You can define the HTML Web page name, URL and angularJS controller files.  
+
+The benefit for using ui-router (over ng-router package) is that you can use multiple UI views on the same Web page. For example, if you need to display a footer to show "Powered by RackSpace", you do not want to hard-wire this phrase in each Web page. Thus, using ui-router can give you more flexibility to build and organize your Web pages.  Similarly, if you need to display different contents or UI views depending on user actions (e.g. mouse click), ui-router will give you flexibility to combine or mix-and-match different UI views.
+
 ```
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise("/dataGenerator");
