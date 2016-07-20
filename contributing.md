@@ -10,7 +10,7 @@ Outlined in this file are:
 * Developer roles and responsibilities for open source community.
 
 ## Engagement Process
-This project will use GIT technology stack for version control management, including branching, merging, and design/code review.  The repository will be https://www.github.com/audacy/xxx, where xxx is the particular project title.
+This project will use Git technology stack for version control management, including branching, merging, and design/code review.  The repository will be https://www.github.com/audacy/xxx, where xxx is the particular project title.
 
 ### Roles
 Like many open source projects, we have the following roles:
