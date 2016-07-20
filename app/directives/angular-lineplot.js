@@ -8,7 +8,7 @@ angular.module('angular-lineplot',['app'])
   .directive('lineplot',[ function(){
 	return{
 	  restrict: 'EA',
-	  template: '<div class="col-sm-1"> \
+	  template: '<div class="col-sm-2"> \
 				   <form> \
 					 <select class = "listlabel" ng-model="data.sc"> \
 					   <option value="Audacy1">AUDACY1</option> \
@@ -17,7 +17,7 @@ angular.module('angular-lineplot',['app'])
 					 </select> \
 				   </form> \
 				 </div> \
-			     <div class="col-sm-1"> \
+			     <div class="col-sm-2"> \
 				   <form> \
 					 <select class = "listlabel" ng-model="data.dataType"> \
 					   <option value="x">X</option> \
@@ -26,7 +26,7 @@ angular.module('angular-lineplot',['app'])
 					 </select> \
 				   </form> \
 				 </div> \
-	             <div class="col-md-5"> \
+	             <div class="col-md-8"> \
 				   <ul> \
 				     <li style="list-style-type:none"> \
 					   <button class = "lineplotbutton" ng-click="loadData()">LOAD</button>\
@@ -100,7 +100,7 @@ angular.module('angular-lineplot',['app'])
 		  series: {
 		  shadowSize: 0	// Drawing is faster without shadows
 		  },
-		  colors: ['#71ECF9'],
+		  colors: ['#07D1EA'],
           points: {show: true,
 		           radius: 2,
                    lineWidth: 1,
@@ -117,23 +117,24 @@ angular.module('angular-lineplot',['app'])
 		  }],
 		  yaxis: {
 		    show: true,
-		    font:{family:"Open Sans", color:"#B8F6FC"},
-		    tickColor: "#464954",	
-            axisLabelPadding:35,			
+		    font:{family:"Open Sans", color:"#0AACCF"},
+		    tickColor: "#F1F1F5",	
+            axisLabelPadding:35,
 		  },
 		  xaxis: {
 		    show: true,
 			mode: "time",
 			//axisLabelUseCanvas: true,
 			axisLabelPadding: 15,			
-		    font:{family:"Open Sans", color:"#B8F6FC"},
-		    tickColor: "#464954",
+		    font:{family:"Open Sans", color:"#0AACCF"},
+		    tickColor: "#F1F1F5",
 		  },
 		  grid: {
 		    show: true,
-            backgroundColor: "#020613",
+            backgroundColor: "#464954",
 		    labelMargin: 10,
 		    margin: 10,
+			color: "#F1F1F5",
 		  },
 		  legend: {
 		    backgroundColor: "#020613",
