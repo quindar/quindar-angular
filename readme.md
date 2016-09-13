@@ -51,7 +51,7 @@ You can refer to the installation instructions under https://nodejs.org/en/downl
 
 * You need to create a local copy of this project. For example,
 ```
-git clone https://github.com/audacyDevOps/quindar-angular.git
+git clone https://github.com/quindar/quindar-angular.git
 ``` 
 
 ## Dependencies
@@ -102,17 +102,17 @@ Quindar-angular project is a mission operations application that uses a variety 
 Quindar is a real-time mission operations application produced by Audacy. You can add your new AngularJS directive to grid-like window in Quindar as per the following steps:
 	
 * Create a copy of Quindar-angular on your target host 
-  - e.g. git clone https://github.com/audacyDevOps/quindar-angular.git)
+  - e.g. git clone https://github.com/quindar/quindar-angular.git)
 * Create a copy of your new AngularJS directive on your target host under a separate folder.
 * Copy your new directive JavaScript file to quindar-angular project.
 
 For example, you have a new directive called quindar-groundtrack.
-  - From quindar-groundtrack project folder "/dist" (https://github.com/audacyDevOps/quindar-groundtrack/tree/master/dist) 
+  - From quindar-groundtrack project folder "/dist" (https://github.com/quindar/quindar-groundtrack/tree/master/dist) 
   - To the quindar-angular project folder "/app/directives".
 * Copy your new directive factory JavaScript file to quindar-angular project.
 
 For example, you have a new directive called quindar-groundtrack with a factory file factory-groundtrack.js:
-  - From quindar-groundtrack project folder "/example/app/factories" (https://github.com/audacyDevOps/quindar-groundtrack/tree/master/example/app/factories)
+  - From quindar-groundtrack project folder "/example/app/factories" (https://github.com/quindar/quindar-groundtrack/tree/master/example/app/factories)
   - To quindar-angular project folder "/app/factories"
 * Edit the quindarWidgetsControllers.js (controller) to add the new widget:
   - Add your widget definition in the $scope.widgetDefinitions:
@@ -182,7 +182,7 @@ From the above example, it will enable Quindar widget to render groundtrack widg
 to see if the versions are compatible.
 
 For example:
-  - quindar-groundtrack requires D3 and angular-d3 third party JS/CSS. They are consolidated and concatenated in the files "groundtrack-thirdparty.js" and "groundtrack-thirdparty.css" for convenience. Refer to https://github.com/audacyDevOps/quindar-groundtrack/tree/master/example/dist for details.
+  - quindar-groundtrack requires D3 and angular-d3 third party JS/CSS. They are consolidated and concatenated in the files "groundtrack-thirdparty.js" and "groundtrack-thirdparty.css" for convenience. Refer to https://github.com/quindar/quindar-groundtrack/tree/master/example/dist for details.
   - You can refer to the /example/index.html as an example.
   - e.g. for quindar-groundtrack project, you will need to add the following files:
 ```
@@ -217,7 +217,7 @@ You will find detailed technical documentation (e.g. user guide) and examples in
 
 # Installation Guide
 ## Overview
-* Git clone the platform project from Github, e.g. git clone https://github.com/audacyDevOps/quindar-angular
+* Git clone the platform project from Github, e.g. git clone https://github.com/quindar/quindar-angular
 * Install NodeJS dependencies - use buildme.sh to install npm packages
 * Start NodeJS server, e.g. node server.js
 
@@ -231,7 +231,7 @@ curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
 sudo yum -y install nodejs
 ```
  
-* Git clone the platform project from Github, e.g. git clone https://github.com/audacyDevOps/quindar-angular
+* Git clone the platform project from Github, e.g. git clone https://github.com/quindar/quindar-angular
 * Install NodeJS depencencies
 ```
 ./buildme.sh
