@@ -51,7 +51,7 @@ You can refer to the installation instructions under https://nodejs.org/en/downl
 
 * You need to create a local copy of this project. For example,
 ```
-git clone https://github.com/quindar/quindar-angular.git
+git clone https://github.com/quindar/quindar-ux-angular.git
 ``` 
 
 ## Dependencies
@@ -60,19 +60,19 @@ git clone https://github.com/quindar/quindar-angular.git
 * quindar-platform
 * quindar-gmat
 
-Once you download the quindar-angular project, you need to run buildme.sh in the example folder to install required module. Refer to the "How to Run the Demo" section for details. 	
+Once you download the quindar-ux-angular project, you need to run buildme.sh in the example folder to install required module. Refer to the "How to Run the Demo" section for details. 	
 	
 ## How to Run the Demo
 * After creating a local copy of this project, run the script "buildme.sh" to install NodeJS dependencies and libraries:
 
 ```
-cd quindar-angular
+cd quindar-ux-angular
 ./buildme.sh
 ```
 
 If you use Windows machine, you can run the following commands as an alternative:
 ```
-cd quindar-angular
+cd quindar-ux-angular
 npm install
 mkdir log
 ```
@@ -96,24 +96,24 @@ The widgets will be available in:
 * AngularJS directives
 AngularJS directives are similar to HTML buttons that developers find in many Web pages. They can add these directives in your Web pages, similar to adding buttons or "div" tags. Each directive denotes a widget function, with associated backend data sources you can configure or customize).
 * Mission operations application
-Quindar-angular project is a mission operations application that uses a variety of widgets. You can add or customize your own widgets too using the widget framework from quindar-angular project.
+Quindar-ux-angular project is a mission operations application that uses a variety of widgets. You can add or customize your own widgets too using the widget framework from quindar-ux-angular project.
 
 ## How to Integrate with Quindar 
 Quindar is a real-time mission operations application produced by Audacy. You can add your new AngularJS directive to grid-like window in Quindar as per the following steps:
 	
-* Create a copy of Quindar-angular on your target host 
-  - e.g. git clone https://github.com/quindar/quindar-angular.git)
+* Create a copy of Quindar-ux-angular on your target host 
+  - e.g. git clone https://github.com/quindar/quindar-ux-angular.git)
 * Create a copy of your new AngularJS directive on your target host under a separate folder.
-* Copy your new directive JavaScript file to quindar-angular project.
+* Copy your new directive JavaScript file to quindar-ux-angular project.
 
 For example, you have a new directive called quindar-groundtrack.
   - From quindar-groundtrack project folder "/dist" (https://github.com/quindar/quindar-groundtrack/tree/master/dist) 
-  - To the quindar-angular project folder "/app/directives".
-* Copy your new directive factory JavaScript file to quindar-angular project.
+  - To the quindar-ux-angular project folder "/app/directives".
+* Copy your new directive factory JavaScript file to quindar-ux-angular project.
 
 For example, you have a new directive called quindar-groundtrack with a factory file factory-groundtrack.js:
   - From quindar-groundtrack project folder "/example/app/factories" (https://github.com/quindar/quindar-groundtrack/tree/master/example/app/factories)
-  - To quindar-angular project folder "/app/factories"
+  - To quindar-ux-angular project folder "/app/factories"
 * Edit the quindarWidgetsControllers.js (controller) to add the new widget:
   - Add your widget definition in the $scope.widgetDefinitions:
 ```
@@ -194,8 +194,8 @@ For example:
   <script src="config/clientSettings.js"></script>
 ```
 
-* You can manually re-test your new quindar-angular mission operations application to verify if the application works as expected.
-  - There will be some automated widget test scripts in the quindar-angular project.
+* You can manually re-test your new quindar-ux-angular mission operations application to verify if the application works as expected.
+  - There will be some automated widget test scripts in the quindar-ux-angular project.
   - You can run "nodemon server.js" and open a Web browser with the URL http://localhost:3000 to test the changes.
 
 You will find detailed technical documentation (e.g. user guide) and examples in the subfolders.
@@ -219,7 +219,7 @@ You will find detailed technical documentation (e.g. user guide) and examples in
 
 # Installation Guide
 ## Overview
-* Git clone the platform project from Github, e.g. git clone https://github.com/quindar/quindar-angular
+* Git clone the quindar project from Github, e.g. git clone https://github.com/quindar/quindar-ux-angular
 * Install NodeJS dependencies - use buildme.sh to install npm packages
 * Start NodeJS server, e.g. node server.js
 
@@ -233,7 +233,7 @@ curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
 sudo yum -y install nodejs
 ```
  
-* Git clone the platform project from Github, e.g. git clone https://github.com/quindar/quindar-angular
+* Git clone the quindar project from Github, e.g. git clone https://github.com/quindar/quindar-ux-angular
 * Install NodeJS depencencies
 ```
 ./buildme.sh
