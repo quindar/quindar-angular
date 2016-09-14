@@ -177,6 +177,8 @@ From the above example, it will enable Quindar widget to render groundtrack widg
   - var app = angular.module('app')
   - Add your new module (e.g. angular-groundtrack) as a dependency to the angular.module.
 
+* Remove dependencies from the controller file (e.g. app-lineplot.js).
+
 * Update the JavaScript and CSS stylesheet in the file index.html
   - Your new AngularJS directive probably requires new JS/CSS files. You may want to review the current index.html
 to see if the versions are compatible.
