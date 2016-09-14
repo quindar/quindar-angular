@@ -173,9 +173,9 @@ $scope.dashboards = [
 
 From the above example, it will enable Quindar widget to render groundtrack widget on page 4, by specifying the directive name "groundtrack". 
 
-* Add the controller quindarWidgetsControllers.js to include your new directive. Here is an example of the changes:
+* Modify quindarWidgetsControllers.js to add your new module as a dependency. Here is an example of the changes:
   - var app = angular.module('app')
-  - Add your new directive (e.g. angular-groundtrack) as a dependency to the angular.module.
+  - Add your new module (e.g. angular-groundtrack) as a dependency to the angular.module.
 
 * Update the JavaScript and CSS stylesheet in the file index.html
   - Your new AngularJS directive probably requires new JS/CSS files. You may want to review the current index.html
